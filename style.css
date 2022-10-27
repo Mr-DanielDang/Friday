@@ -36,7 +36,7 @@ html {
     background-color: var(--background-color-taskboard-title);
     margin-bottom: 0;
     padding: 1rem;  /* reboot.scss set 0.5rem to margin-bottom for headings */
-    border: 0.1rem solid var(--color-taskboard-title-border);
+    border-bottom: 0.1rem solid var(--color-taskboard-title-border);
 }
 
 .tasks-container {
