@@ -11,6 +11,7 @@ html {
     font-family: Helvetica, sans-serif;   
     text-align: center; 
 }
+<<<<<<< ours
 .banner-container h2 {
     font-size: xx-large;
     text-align: center;
@@ -28,3 +29,88 @@ html {
     height: auto;
     background-image: url("images/image_banner.png");
 }
+=======
+
+:root {
+    --backgrouond-color-body: #5776a8;
+    --background-color-header: #a88957;
+    --background-color-banner: #a88957;
+    --background-color-footer: #a88957;
+    --background-color-taskboard-title: #a88957;
+    --color-taskboard-title-border: #705b3a;
+    --background-color-taskboard-body: #aebdd5;
+    --background-color-task-title: #fadaab;
+    --background-color-task-attribute: #91a5c6;
+    --background-color-task-value: #c3cee0;    
+    --color-task-border: #f39c1f;
+    --background-color-todo: #8994a5;
+    --background-color-inprogress: #f7df77;
+    --background-color-review: #77c4f7;
+    --background-color-done: #0bbe52;
+    --background-color-submit-button: #4065a1;
+    --background-color-reset-button: #8493ac;
+}
+
+.board-name {
+    background-color: var(--background-color-taskboard-title);
+    margin-bottom: 0;
+    padding: 1rem;  /* reboot.scss set 0.5rem to margin-bottom for headings */
+    border-bottom: 0.1rem solid var(--color-taskboard-title-border);
+}
+
+.tasks-container {
+    background-color: var(--background-color-taskboard-body);
+    padding: 2rem;
+    width: 100%;
+    height: auto;
+}
+
+.task-name {
+    background-color: var(--background-color-task-title);
+}
+
+.task-name, .task-description, .task-date, .task-assigned {
+    border-top: 0.1rem;
+    border-right: 0.1rem;
+    border-bottom: 0;
+    border-left: 0.1rem;
+    border-style: solid;
+    border-color: var(--color-task-border);;
+}
+
+.task-status {
+    border-width: 0.1rem;
+    border-style: solid;    
+    border-color: var(--color-task-border);
+}
+
+.task-attr {
+    border-top: 0;
+    border-right: 0.1rem;
+    border-bottom: 0;
+    border-left: 0;
+    border-style: solid;
+    border-color: var(--color-task-border);
+}
+
+.task-description .task-attr, .task-date .task-attr, .task-assigned .task-attr, .task-status .task-attr {
+    background-color: var(--background-color-task-attribute);
+}
+
+.task-container .task-todo {
+    background-color: var(--background-color-todo);
+}
+
+.task-container .task-in-progress {
+    background-color: var(--background-color-inprogress);
+}
+
+.task-container .task-in-review {
+    background-color: var( --background-color-review);
+}
+
+.task-container .task-done {
+    background-color: var(--background-color-done);
+}
+
+>>>>>>> theirs
