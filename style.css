@@ -18,13 +18,13 @@ html {
     padding: 5%
 }
 
-.banner-container .div .img {
+.banner-container img {
     width: 100%;
-    padding: 0 7%;
+    padding: 0%;
     margin: 0;
-    border-width: 20px;
-    max-width: 200px;
+    border-width: 1px;
+    max-width: 100%;
     background-color: #5471ab;
-    height: 100px;
+    height: auto;
     background-image: url("images/image_banner.png");
 }
