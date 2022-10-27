@@ -11,3 +11,16 @@ html {
     font-family: Helvetica, sans-serif;   
     text-align: center; 
 }
+
+:root {
+    --backgrouond-color-body: #5776a8;
+    --background-color-header: #a88957;
+    --background-color-banner: #a88957;
+    --background-color-footer: #a88957;
+    --background-color-taskboard-title: #a88957;
+    --background-color-taskboard-body: #aebdd5;
+    --background-color--task-title: #fadaab;
+    --color-task-border: #f39c1f;
+    --background-color-submit-button: #4065a1;
+    --background-color-reset-button: #8493ac;
+}
