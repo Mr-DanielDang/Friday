@@ -12,6 +12,24 @@ html {
     text-align: center; 
 }
 
+#header-bg {
+    background-color: #a88957;
+    height: 100px;
+}
+
+#header {
+    margin: 0em 5em;
+
+}
+
+#header ul {
+    list-style: none;
+}
+
+#header li {
+    display: inline;
+}
+
 :root {
     --backgrouond-color-body: #5776a8;
     --background-color-header: #a88957;
