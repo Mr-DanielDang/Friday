@@ -35,14 +35,14 @@
                 <div class="tasks-container">
                     <!-- bootstrap grids -->
                     <div class="container task-container">
-                        <div class="row g-grid gap-5 justify-content-center">
+                        <div class="row gap-5 justify-content-center">
                             <!-- First task goes here -->
                             <div class="col col-md-5">
                                 <div class="row task-name text-center">
                                     <div class="col col-md-3 task-attr">Name</div>
                                     <div class="col col-md-9 task-value">Create a Nav bar</div>
                                 </div>
-                                <div class="row task-description text-center">
+                                <div class="row task-description text-wrap">
                                     <div class="col col-md-3 task-attr">Description</div>
                                     <div class="col col-md-9 task-value">Create a Nav bar at the header, adapting to screen sizes</div>
                                 </div>
@@ -50,7 +50,7 @@
                                     <div class="col col-md-3 task-attr">Date</div>
                                     <div class="col col-md-9 task-value">29/10/22</div>
                                 </div>
-                                <div class="row task-assigned text-center">
+                                <div class="row task-assigned text-wrap">
                                     <div class="col col-md-3 task-attr">Assigned To</div>
                                     <div class="col col-md-9 task-value">Jerry</div>
                                 </div>
@@ -59,13 +59,17 @@
                                     <div class="col col-md-9 task-value task-in-progress">IN PROGRESS</div>
                                 </div>
                             </div>
+
+                            <!-- Force next columns to break to new line at sm and xs breakpoints -->
+                            <div class="w-100 d-block d-md-none"></div>
+
                             <!-- Second task goes here -->
                             <div class="col col-md-5 task-container">
                                 <div class="row task-name text-center">
                                     <div class="col col-md-3 task-attr">Name</div>
                                     <div class="col col-md-9 task-value">Create a Footer</div>
                                 </div>
-                                <div class="row task-description text-center">
+                                <div class="row task-description text-wrap">
                                     <div class="col col-md-3 task-attr">Description</div>
                                     <div class="col col-md-9 task-value">Create a footer to include copyright and contact info</div>
                                 </div>
@@ -73,7 +77,7 @@
                                     <div class="col col-md-3 task-attr">Date</div>
                                     <div class="col col-md-9 task-value">28/10/22</div>
                                 </div>
-                                <div class="row task-assigned text-center">
+                                <div class="row task-assigned text-wrap">
                                     <div class="col col-md-3 task-attr">Assigned To</div>
                                     <div class="col col-md-9 task-value">Daniel</div>
                                 </div>
@@ -83,6 +87,9 @@
                                 </div>
                             </div>
                           
+                            <!-- Force next columns to break to new line at sm and xs breakpoints -->
+                            <div class="w-100 d-block d-md-none"></div>
+
                             <!-- Third task goes here -->
                             <div class="col col-md-5 task-container">
                                 <div class="row task-name text-center">
@@ -106,6 +113,10 @@
                                     <div class="col col-md-9 task-value task-in-review">REVIEW</div>
                                 </div>
                             </div>
+
+                            <!-- Force next columns to break to new line at sm and xs breakpoints -->
+                            <div class="w-100 d-block d-md-none"></div>
+
                             <!-- Fourth task goes here -->
                             <div class="col col-md-5 task-container">
                                 <div class="row task-name text-center">
@@ -129,6 +140,10 @@
                                     <div class="col col-md-9 task-value task-todo">TODO</div>
                                 </div>
                             </div>
+
+                            <!-- Force next columns to break to new line at sm and xs breakpoints -->
+                            <div class="w-100 d-block d-md-none"></div>
+
                             <!-- Fifth task goes here -->
                             <div class="col col-md-5 task-container">
                                 <div class="row task-name text-center">
