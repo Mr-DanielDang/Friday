@@ -11,3 +11,20 @@ html {
     font-family: Helvetica, sans-serif;   
     text-align: center; 
 }
+.banner-container h2 {
+    font-size: xx-large;
+    text-align: center;
+    background-color: #5471ab;
+    padding: 5%
+}
+
+.banner-container .div .img {
+    width: 100%;
+    padding: 0 7%;
+    margin: 0;
+    border-width: 20px;
+    max-width: 200px;
+    background-color: #5471ab;
+    height: 100px;
+    background-image: url("images/image_banner.png");
+}
