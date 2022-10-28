@@ -26,6 +26,32 @@
                 <h2>Friday, plan your next week</h2>
                 <div class="background image"><img src="images/image_banner.jpg" alt="Lady smiling happily on street"></div>
             </section>
+            <!-- Creating tasks, work-in-progress -->
+            <section class="create-task">
+                <form>
+                    <div class="form-floating container-md border border-light">
+                        <input type="text" class="form-control" id="InputTitle" aria-describedby="titleHelp">
+                        <label for="InputTitle">Title</label>
+                    </div>
+                    <div class="form-floating container-md border border-light">
+                        <input type="text" class="form-control" id="InputName" aria-describedby="nameHelp">
+                        <label for="InputName">Assigned to:</label>
+                    </div>
+                    <div class="form-floating container-md border border-light">
+                        <textarea class="form-control" placeholder="Add a description" id="InputDesc" style="height: 200px;"></textarea>
+                        <label for="InputDesc">Description</label>
+                    </div>
+                    <div class="form-floating container-md border border-light">
+                        <input type="date" id="InputDate">
+                    </div>
+                    <div class="bg-primary text-white rounded-pill">
+                        <h3>Submit</h3>
+                    </div>
+                    <div class="bg-secondary text-white rounded-pill">
+                        <h5>Reset</h5>
+                    </div>
+                </form>
+            </section>
             <section class="task-board">
                 <div class="board-name">
                     <h3>Task Board</h3>
