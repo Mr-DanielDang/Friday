@@ -5,13 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!-- Bootstrap CSS -->
-<<<<<<< HEAD
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <link href="style.css" rel="stylesheet">
-=======
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"> 
         <link href="style.css" type="text/css" rel="stylesheet">
->>>>>>> main
         <title>Friday</title>
     </head>
     <body>
@@ -33,7 +28,32 @@
                     <img src="images/image_banner.png" alt="Happy lady smiling at shopfront">
                 </div>
             </section>
-
+            <!-- Creating tasks, work-in-progress -->
+            <section class="create-task">
+                <form>
+                    <div class="form-floating container-md border border-light">
+                        <input type="text" class="form-control" id="InputTitle" aria-describedby="titleHelp">
+                        <label for="InputTitle">Title</label>
+                    </div>
+                    <div class="form-floating container-md border border-light">
+                        <input type="text" class="form-control" id="InputName" aria-describedby="nameHelp">
+                        <label for="InputName">Assigned to:</label>
+                    </div>
+                    <div class="form-floating container-md border border-light">
+                        <textarea class="form-control" placeholder="Add a description" id="InputDesc" style="height: 200px;"></textarea>
+                        <label for="InputDesc">Description</label>
+                    </div>
+                    <div class="form-floating container-md border border-light">
+                        <input type="date" id="InputDate">
+                    </div>
+                    <div class="bg-primary text-white rounded-pill">
+                        <h3>Submit</h3>
+                    </div>
+                    <div class="bg-secondary text-white rounded-pill">
+                        <h5>Reset</h5>
+                    </div>
+                </form>
+            </section>
             <section class="task-board">
                 <div class="board-name">
                     <h3>Task Board</h3>
