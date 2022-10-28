@@ -34,7 +34,7 @@ html {
     background-color: #5471ab;
     border: none;
     color: white;
-    padding: 10px 80px;
+    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -43,9 +43,12 @@ html {
     border-radius: 50;
     border-radius: 25px;
     font-weight: bold;
+    position: relative;
+    top: -200px
+    z-index: 10;
   }
 
-:root {
+  :root {
     --backgrouond-color-body: #5776a8;
     --background-color-header: #a88957;
     --background-color-banner: #a88957;
