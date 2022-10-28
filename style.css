@@ -68,6 +68,10 @@ header {
     top: 80px;
 }
 
+.task-board {
+    position: relative;
+}
+
 .board-name {
     background-color: var(--background-color-taskboard-title);
     margin-bottom: 0;
