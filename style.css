@@ -12,35 +12,6 @@ html {
     text-align: center; 
 }
 
-header {
-    background-color: var(--background-color-header);
-    height: 80px;
-}
-
-.header-container {
-    margin: 0em 5em;
-    min-width: auto;
-    max-height: auto;
-}
-
-.header-container ul {
-    list-style: none;
-}
-
-.header-container li {
-    display: inline;
-}
-
-.header-container #logo {
-    width: 90px;
-    height: 70px;
-}
-
-.header-container #contact {
-    width: 50px;
-    height: 50px;
-}
-
 :root {
     --backgrouond-color-body: #5776a8;
     --background-color-header: #a88957;
@@ -59,6 +30,42 @@ header {
     --background-color-done: #0bbe52;
     --background-color-submit-button: #4065a1;
     --background-color-reset-button: #8493ac;
+}
+
+header {
+    background-color: var(--background-color-header);
+    height: 80px;
+    width: 100%;
+    position: fixed;
+}
+
+.header-container {
+    margin: 0em 5em;
+    min-width: auto;
+    max-height: auto;
+}
+
+.header-container ul {
+    list-style: none;
+}
+
+.header-container li {
+    display: inline;
+}
+
+.header-container #logo {
+    width: 100px;
+    height: 70px;
+}
+
+.header-container #contact {
+    width: 50px;
+    height: 50px;
+}
+
+.banner {
+    position: relative;
+    top: 80px;
 }
 
 .board-name {
