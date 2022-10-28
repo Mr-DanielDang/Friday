@@ -14,7 +14,7 @@ html {
 .banner-container h2 {
     font-size: xx-large;
     text-align: center;
-    background-color: #5471ab;
+    background-color: #a88957;
     padding: 5%
 }
 
@@ -27,7 +27,23 @@ html {
     background-color: #5471ab;
     height: auto;
     background-image: url("images/image_banner.png");
+    opacity: 50%;
 }
+
+.banner-container button {
+    background-color: #5471ab;
+    border: none;
+    color: white;
+    padding: 10px 80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 40px;
+    /* background: url(images/image_banner.png); */
+    border-radius: 50;
+    border-radius: 25px;
+    font-weight: bold;
+  }
 
 :root {
     --backgrouond-color-body: #5776a8;
@@ -111,3 +127,15 @@ html {
     background-color: var(--background-color-done);
 }
 
+footer ul {
+    background-color: #a88957;
+    padding: 10px 5px;
+}
+
+footer li {
+    display: inline-block;
+    list-style: none;
+    color: white;
+    
+
+}
