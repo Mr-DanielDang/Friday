@@ -85,6 +85,12 @@ header {
     top: 80px;
 }
 
+.create-task {
+    background-color: var(--background-color-taskboard-body);
+    padding: 1rem;
+    width: 50%;
+}
+
 .task-board {
     position: relative;
 }
