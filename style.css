@@ -125,51 +125,7 @@ header {
     font-size: 0.8rem;
 }
 
-/* 
-.task-name {
-    background-color: var(--background-color-task-title);
+.card textarea {
+    border: none;
+    padding: 0;
 }
-
-.task-name, .task-description, .task-date, .task-assigned {
-    border-top: 0.1rem;
-    border-right: 0.1rem;
-    border-bottom: 0;
-    border-left: 0.1rem;
-    border-style: solid;
-    border-color: var(--color-task-border);;
-}
-
-.task-status {
-    border-width: 0.1rem;
-    border-style: solid;    
-    border-color: var(--color-task-border);
-}
-
-.task-attr {
-    border-top: 0;
-    border-right: 0.1rem;
-    border-bottom: 0;
-    border-left: 0;
-    border-style: solid;
-    border-color: var(--color-task-border);
-}
-
-.task-description .task-attr, .task-date .task-attr, .task-assigned .task-attr, .task-status .task-attr {
-    background-color: var(--background-color-task-attribute);
-}
-
-.task-container .task-todo {
-    background-color: var(--background-color-todo);
-}
-
-.task-container .task-in-progress {
-    background-color: var(--background-color-inprogress);
-}
-
-.task-container .task-in-review {
-    background-color: var( --background-color-review);
-}
-
-.task-container .task-done {
-    background-color: var(--background-color-done);
-} */
