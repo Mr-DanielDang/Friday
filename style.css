@@ -109,6 +109,23 @@ header {
     height: auto;
 }
 
+.card {
+    opacity: 0.85;
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    scale: 1.2;
+    box-shadow: 0.5rem 0.5rem 0.5rem rgba(240, 198, 15, 0.8);
+    margin: 0.5rem;   
+    opacity: 1;
+}
+
+.card .custom-select, .card input {
+    font-size: 0.8rem;
+}
+
+/* 
 .task-name {
     background-color: var(--background-color-task-title);
 }
@@ -155,4 +172,4 @@ header {
 
 .task-container .task-done {
     background-color: var(--background-color-done);
-}
+} */
