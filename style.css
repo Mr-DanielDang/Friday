@@ -128,54 +128,26 @@ header {
     height: auto;
 }
 
-.task-name {
-    background-color: var(--background-color-task-title);
+.card {
+    opacity: 0.85;
+    transition: all 0.3s ease-in-out;
 }
 
-.task-name, .task-description, .task-date, .task-assigned {
-    border-top: 0.1rem;
-    border-right: 0.1rem;
-    border-bottom: 0;
-    border-left: 0.1rem;
-    border-style: solid;
-    border-color: var(--color-task-border);;
+.card:hover {
+    scale: 1.2;
+    box-shadow: 0.5rem 0.5rem 0.5rem rgba(240, 198, 15, 0.8);
+    margin: 0.5rem;   
+    opacity: 1;
 }
 
-.task-status {
-    border-width: 0.1rem;
-    border-style: solid;    
-    border-color: var(--color-task-border);
+.card .custom-select, .card input {
+    font-size: 0.8rem;
 }
 
-.task-attr {
-    border-top: 0;
-    border-right: 0.1rem;
-    border-bottom: 0;
-    border-left: 0;
-    border-style: solid;
-    border-color: var(--color-task-border);
+.card textarea {
+    border: none;
+    padding: 0;
 }
-
-.task-description .task-attr, .task-date .task-attr, .task-assigned .task-attr, .task-status .task-attr {
-    background-color: var(--background-color-task-attribute);
-}
-
-.task-container .task-todo {
-    background-color: var(--background-color-todo);
-}
-
-.task-container .task-in-progress {
-    background-color: var(--background-color-inprogress);
-}
-
-.task-container .task-in-review {
-    background-color: var( --background-color-review);
-}
-
-.task-container .task-done {
-    background-color: var(--background-color-done);
-}
-
 
 footer ul {
     background-color: #a88957;
@@ -186,6 +158,4 @@ footer li {
     display: inline-block;
     list-style: none;
     color: white;
-    
-
 }
