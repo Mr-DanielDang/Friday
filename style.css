@@ -112,9 +112,15 @@ header {
   }
 
 .create-task {
-    background-color: var(--background-color-taskboard-body);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);    
+    background-color: rgba(0,0,0,0.5);;
     padding: 1rem;
     width: 50%;
+    z-index: 200;
 }
 
 .task-board {
