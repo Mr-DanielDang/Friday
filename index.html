@@ -26,40 +26,62 @@
         </header>
         <main> 
             <section class="banner-container">
-                <!-- I'm struggling to get CSS to modify the img -->
-                    <h2>Friday, plan your next week</h2>
-                    <img src="images/image_banner.png" alt="Happy lady smiling at shopfront">
-
+                <!-- I'm struggling to get CSS to modify the img -->    
+                <img src="images/image_banner.png" alt="Happy lady smiling at shopfront">
+                <h2>Friday, plan your next week</h2>
+                <button id="createTask" class="btn btn-primary">
+                    <h3>Create Task</h3>
+                </button>
             </section>
+
             <!-- Creating tasks, work-in-progress -->
-            <section class="create-task" style="display: none;">
+            <section class="create-task" id="create-task" style="display: none;">
+
                 <form>
-                    <div class="container-md border div-taskInputColor">
-                        <label for="InputTitle">TITLE:</label>
-                        <input type="text" class="form-control div-taskInputColor" id="InputTitle" aria-describedby="titleHelp">
+                    <!-- Trying to change the colour of the borders -->
+                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
+                        <label for="InputTitle">TITLE</label>
+                        <input type="text" class="form-control div-taskInputColor2" id="InputTitle" aria-describedby="titleHelp">
                     </div>
-                    <div class="container-md border div-taskInputColor">
-                        <label for="InputName">ASSIGNED TO:</label>
-                        <select class="form-control div-taskInputColor" id="InputName" aria-describedby="nameHelp" aria-placeholder="select a group member">
-                            <option value="1">Jerry</option>
-                            <option value="2">Samantha</option>
-                            <option value="3">Daniel</option>
+                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
+                        <label for="InputName" class="col-auto">ASSIGNED TO:</label>
+                        <div class="col-auto">
+                            <select class="form-control div-taskInputColor2" id="InputName" aria-describedby="nameHelp" aria-placeholder="select a group member">
+                                <option value="1">Jerry</option>
+                                <option value="2">Samantha</option>
+                                <option value="3">Daniel</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
+                        <label for="InputDesc">DESCRIPTION</label>
+                        <textarea class="form-control div-taskInputColor2" id="InputDesc" style="height: 200px;"></textarea>
+                    </div>
+                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
+                        <label for="InputDate">DATE:</label>
+                        <input type="date" id="InputDate" class="form-control div-taskInputColor2">
+                    </div>
+                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
+                        <label for="InputStatus">STATUS</label>
+                        <select class="form-control div-taskInputColor2" id="InputStatus" aria-describedby="statusHelp">
+                            <option value="1"><small>To Do</small></option>
+                            <option value="2"><small>In Progress</small></option>
+                            <option value="3"><small>In Review</small></option>
+                            <option value="4"><small>Done</small></option> 
                         </select>
                     </div>
-                    <div class="container-md border div-taskInputColor">
-                        <label for="InputDesc">DESCRIPTION:</label>
-                        <textarea class="form-control div-taskInputColor" id="InputDesc" style="height: 200px;"></textarea>
+                    <div class="row">
+                        <button id="submitTask" class="column bg-primary text-white rounded-pill" style="height: 30; width: 30%; margin-right: 10px; ">
+                            <h5>Submit</h5>
+                        </button>
+                        <!-- Reset refreshes the webpage -->
+                        <button id="resetTask" class="column bg-secondary text-white rounded-pill" style="height: 30; width: 30%; margin-right: 10px;">
+                            <h5>Reset</h5>
+                        </button>
+                        <button id="closeTask" class="column bg-dark text-white rounded-pill" style="height: 30; width: 30%;">
+                            <h5>Close</h5>
+                        </button>
                     </div>
-                    <div class="container-md border div-taskInputColor">
-                        <label for="InputDate">DATE:</label>
-                        <input type="date" id="InputDate">
-                    </div>
-                    <button id="submitTask" class="bg-primary text-white rounded-pill" style="height: 50px; width: 230px; border: none;">
-                        <h3>Submit</h3>
-                    </button>
-                    <button id="resetTask" class="bg-secondary text-white rounded-pill" style="height: 38px; width: 150px; border: none;">
-                        <h5>Reset</h5>
-                    </button>
                 </form>
             </section>
 

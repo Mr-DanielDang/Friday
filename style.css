@@ -12,10 +12,15 @@ html {
     text-align: center; 
 }
 .banner-container h2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -500%);
+    width: 100%;
     font-size: xx-large;
     text-align: center;
-    background-color: #5471ab;
-    padding: 5%
+    background-color: var(--background-color-header);
+    padding: 10px;
 }
 
 .banner-container img {
@@ -54,6 +59,7 @@ header {
     height: 80px;
     width: 100%;
     position: fixed;
+    z-index: 100;
 }
 
 .header-container {
@@ -92,7 +98,7 @@ header {
     left: 50%;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);    
-    background-color: rgba(0,0,0,0.5);;
+    background-color: var(--background-color-inprogress);
     padding: 1rem;
     width: 50%;
     z-index: 200;
@@ -141,7 +147,31 @@ header {
     background-color: #f7df77;
 }
 
+.div-taskInputColor2 {
+    background-color: #faefbd;
+}
+
 .no-outline:focus {
     outline: none;
     border: none;
+}
+
+#createTask {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -300%);
+    text-align: center;
+    background-color: var(--background-color-banner);
+    border-color: #705b3a;
+}
+
+.row {
+    align-items: center;
+    justify-content: center;
+    padding-top: 12px;
+}
+
+.div-borderColor {
+    border-color: #705b3a;
 }
