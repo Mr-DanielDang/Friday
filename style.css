@@ -129,3 +129,12 @@ header {
     border: none;
     padding: 0;
 }
+
+.div-taskInputColor {
+    background-color: #f7df77;
+}
+
+.no-outline:focus {
+    outline: none;
+    border: none;
+}
