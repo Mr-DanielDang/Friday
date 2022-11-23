@@ -37,6 +37,7 @@ header {
     height: 80px;
     width: 100%;
     position: fixed;
+    z-index: 100;
 }
 
 .header-container {
@@ -77,7 +78,7 @@ header {
     font-family: Helvetica, sans-serif; 
     font-weight: bold;
     text-align: center;
-    background-color: #a88957;
+    background-color: var(--background-color-header);
     padding: 2%;
     color: black;
     margin-top: 20px;
@@ -92,7 +93,7 @@ header {
 
 .banner-container button {
     font-family: Helvetica, sans-serif;
-    background-color: #a88957;
+    background-color: var(--background-color-banner);
     border: none;
     color: black;
     padding: 10px 20px;
@@ -110,6 +111,29 @@ header {
     border:2px solid black;
     box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8);
   }
+    
+.div-taskInputColor {
+    background-color: #f7df77;
+}
+
+.div-taskInputColor2 {
+    background-color: #faefbd;
+}
+
+.no-outline:focus {
+    outline: none;
+    border: none;
+}
+
+.row {
+    align-items: center;
+    justify-content: center;
+    padding-top: 12px;
+}
+
+.div-borderColor {
+    border-color: #705b3a;
+}  
 
 .create-task {
     position: fixed;
@@ -117,7 +141,7 @@ header {
     left: 50%;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);    
-    background-color: rgba(0,0,0,0.5);;
+    background-color: var(--background-color-inprogress);
     padding: 1rem;
     width: 50%;
     z-index: 200;

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
         <title>Friday</title>
         <script src="script.js" defer></script>
     </head>
+
     <body>
         <header>
             <div class="header-container">
@@ -26,37 +28,61 @@
         </header>
         <main> 
             <section class="banner-container">
-               
-                    <h2>FRIDAY plan your next week</h2>  
-                    <button type="button">CREATE TASK</button>
-            
+                <h2>FRIDAY plan your next week</h2>  
+                <button type="button" id="createTask" class="btn btn-primary">Create Task</button>
             </section>
+
             <!-- Creating tasks, work-in-progress -->
-            <section class="create-task" style="display: none;">
+            <section class="create-task" id="create-task" style="display: none;">
+
                 <form>
-                    <div class="form-floating container-md border border-light">
-                        <input type="text" class="form-control" id="InputTitle" aria-describedby="titleHelp">
-                        <label for="InputTitle">Title</label>
+                    <!-- Trying to change the colour of the borders -->
+                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
+                        <label for="InputTitle">TITLE</label>
+                        <input type="text" class="form-control div-taskInputColor2" id="InputTitle" aria-describedby="titleHelp">
                     </div>
-                    <div class="form-floating container-md border border-light">
-                        <input type="text" class="form-control" id="InputName" aria-describedby="nameHelp">
-                        <label for="InputName">Assigned to:</label>
+                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
+                        <label for="InputName" class="col-auto">ASSIGNED TO:</label>
+                        <div class="col-auto">
+                            <select class="form-control div-taskInputColor2" id="InputName" aria-describedby="nameHelp" aria-placeholder="select a group member">
+                                <option value="1">Jerry</option>
+                                <option value="2">Samantha</option>
+                                <option value="3">Daniel</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form-floating container-md border border-light">
-                        <textarea class="form-control" placeholder="Add a description" id="InputDesc" style="height: 200px;"></textarea>
-                        <label for="InputDesc">Description</label>
+                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
+                        <label for="InputDesc">DESCRIPTION</label>
+                        <textarea class="form-control div-taskInputColor2" id="InputDesc" style="height: 200px;"></textarea>
                     </div>
-                    <div class="form-floating container-md border border-light">
-                        <input type="date" id="InputDate">
+                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
+                        <label for="InputDate">DATE:</label>
+                        <input type="date" id="InputDate" class="form-control div-taskInputColor2">
                     </div>
-                    <div class="bg-primary text-white rounded-pill">
-                        <h3>Submit</h3>
+                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
+                        <label for="InputStatus">STATUS</label>
+                        <select class="form-control div-taskInputColor2" id="InputStatus" aria-describedby="statusHelp">
+                            <option value="1"><small>To Do</small></option>
+                            <option value="2"><small>In Progress</small></option>
+                            <option value="3"><small>In Review</small></option>
+                            <option value="4"><small>Done</small></option> 
+                        </select>
                     </div>
-                    <div class="bg-secondary text-white rounded-pill">
-                        <h5>Reset</h5>
+                    <div class="row">
+                        <button id="submitTask" class="column bg-primary text-white rounded-pill" style="height: 30; width: 30%; margin-right: 10px; ">
+                            <h5>Submit</h5>
+                        </button>
+                        <!-- Reset refreshes the webpage -->
+                        <button id="resetTask" class="column bg-secondary text-white rounded-pill" style="height: 30; width: 30%; margin-right: 10px;">
+                            <h5>Reset</h5>
+                        </button>
+                        <button id="closeTask" class="column bg-dark text-white rounded-pill" style="height: 30; width: 30%;">
+                            <h5>Close</h5>
+                        </button>
                     </div>
                 </form>
             </section>
+
             <section class="task-board">
                 <div class="board-name">
                     <h3>Task Board</h3>
@@ -84,8 +110,7 @@
                                                 <div class="d-flex justify-content-between align-items-baseline">
                                                     <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
                                                     <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                        <option selected><small>Jerry</small></option>
-                                                        <option value="1"><small>Jerry</small></option>
+                                                        <option value="1" selected><small>Jerry</small></option>
                                                         <option value="2"><small>Samantha</small></option>
                                                         <option value="3"><small>Daniel</small></option>
                                                     </select>  
@@ -95,8 +120,7 @@
                                                 <div class="d-flex justify-content-between align-items-baseline">
                                                     <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
                                                     <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                        <option selected><small>To Do</small></option>
-                                                        <option value="1"><small>To Do</small></option>
+                                                        <option value="1" selected><small>To Do</small></option>
                                                         <option value="2"><small>In Progress</small></option>
                                                         <option value="3"><small>In Review</small></option>
                                                         <option value="4"><small>Done</small></option>
@@ -127,9 +151,8 @@
                                                 <div class="d-flex justify-content-between align-items-baseline">
                                                     <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
                                                     <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                        <option selected><small>Samantha</small></option>
                                                         <option value="1"><small>Jerry</small></option>
-                                                        <option value="2"><small>Samantha</small></option>
+                                                        <option value="2" selected><small>Samantha</small></option>
                                                         <option value="3"><small>Daniel</small></option>
                                                     </select>  
                                                 </div>
@@ -138,9 +161,8 @@
                                                 <div class="d-flex justify-content-between align-items-baseline">
                                                     <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
                                                     <select class="custom-select custom-select-sm modify-1 border-0 text-muted">
-                                                        <option selected><small>In Progress</small></option>
                                                         <option value="1"><small>To Do</small></option>
-                                                        <option value="2"><small>In Progress</small></option>
+                                                        <option value="2" selected><small>In Progress</small></option>
                                                         <option value="3"><small>In Review</small></option>
                                                         <option value="4"><small>Done</small></option>
                                                     </select>  
