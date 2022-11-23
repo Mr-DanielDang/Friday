@@ -11,25 +11,27 @@ html {
     font-family: Helvetica, sans-serif;   
     text-align: center; 
 }
+
+.block-break {
+    background-color:#5776a8;
+    padding: 1%;
+}
+
 .banner-container h2 {
     font-size: xx-large;
+    font-family: Helvetica, sans-serif; 
+    font-weight: bold;
     text-align: center;
     background-color: #a88957;
-    padding: 5%
+    padding: 2%;
 }
 
-.banner-container img {
-    width: 100%;
-    padding: 0%;
-    margin: 0;
-    border-width: 1px;
-    max-width: 100%;
-    background-color: #5471ab;
-    height: auto;
-    background-image: url("images/image_banner.png");
-    opacity: 50%;
+.banner-container {
+    background-image: url("resources/images/image_banner.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 20rem;
 }
-
 .banner-container button {
     background-color: #5471ab;
     border: none;
@@ -39,13 +41,12 @@ html {
     text-decoration: none;
     display: inline-block;
     font-size: 40px;
-    /* background: url(images/image_banner.png); */
     border-radius: 50;
     border-radius: 25px;
     font-weight: bold;
     position: relative;
-    top: -200px
     z-index: 10;
+    margin: 90px;
   }
 
   :root {
