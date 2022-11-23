@@ -12,11 +12,6 @@ html {
     text-align: center; 
 }
 
-.block-break {
-    background-color:#5776a8;
-    padding: 1%;
-}
-
 .banner-container h2 {
     font-size: xx-large;
     font-family: Helvetica, sans-serif; 
@@ -24,6 +19,15 @@ html {
     text-align: center;
     background-color: #a88957;
     padding: 2%;
+    color: black;
+    margin-top: 20px;
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    transform: translate(-50%);
+    top: 5%;
+    width: 100%;
+    box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8);
 }
 
 .banner-container {
@@ -31,22 +35,28 @@ html {
     background-repeat: no-repeat;
     background-size: cover;
     height: 20rem;
+    top: 80px;
+    position: relative;
 }
 .banner-container button {
-    background-color: #5471ab;
+    font-family: Helvetica, sans-serif;
+    background-color: #a88957;
     border: none;
-    color: white;
+    color: black;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 40px;
-    border-radius: 50;
+    font-size: 20px;
     border-radius: 25px;
     font-weight: bold;
-    position: relative;
+    position: absolute;
     z-index: 10;
-    margin: 90px;
+    left: 50%;
+    transform: translate(-50%);
+    top: 50%;
+    border:2px solid black;
+    box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8);
   }
 
   :root {
