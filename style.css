@@ -94,6 +94,21 @@ header {
     color: whitesmoke;
 }
 
+.banner-container h4 {
+    font-size: 1rem;
+    /* font-family: Helvetica, sans-serif; */
+    position: relative;
+    left:auto;
+}
+
+.banner-container h4 span {
+    font-size: 1rem;
+    font-family: Helvetica, sans-serif;
+    position: relative;
+    /* background-color: #aebdd5; */
+    /* box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8); */
+}
+
 .banner-container button {
     font-family: Helvetica, sans-serif;
     background-color: var(--background-color-banner);
