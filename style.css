@@ -158,7 +158,8 @@ header {
     -ms-transform: translate(-50%,-50%);    
     background-color: var(--background-color-inprogress);
     padding: 1rem;
-    width: 50%;
+    width: 40%;
+    height: auto;
     z-index: 200;
 }
 
