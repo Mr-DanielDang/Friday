@@ -1,16 +1,26 @@
 const showCreateTaskForm = () => {
-        document.getElementById("create-task").style.display = 'block';
-        console.log('Creating task.');
+    document.getElementById("create-task").style.display = 'block';
+    console.log('Creating task.');
+    // set minimum date as today
+    document.getElementById("InputDate").setAttribute('min', td.toISOString().split('T')[0]);        
 }
 
 const resetCreateTaskForm = () => {
-        document.getElementById("create-task").style.display = 'block';
-        console.log('Resetting create task.')
+    document.getElementById("create-task").style.display = 'block';
+    console.log('Resetting create task.');
 }
 
+const clearInputsOfCreateTaskForm = () => {
+    document.getElementById("InputTitle").value = "";
+    document.getElementById("InputName").value = "";
+    document.getElementById("InputDesc").value = "";        
+    document.getElementById("InputDate").value = "";
+    document.getElementById("InputStatus").value = "";        
+}
 const closeCreateTaskForm = () => {
-        document.getElementById("create-task").style.display = 'none';
-        console.log('Closing task.')
+    document.getElementById("create-task").style.display = 'none';
+    console.log('Closing task.');
+    clearInputsOfCreateTaskForm();
 }
 
 const createTaskBtn = document.getElementById("createTask");
@@ -20,6 +30,75 @@ resetTaskBtn.onclick = resetCreateTaskForm;
 const closeTaskForm = document.getElementById("closeTask");
 closeTaskForm.onclick = closeCreateTaskForm;
 
+
+const submitTask = document.getElementById("submitTask");
+submitTask.addEventListener("click", validateTaskForm);
+
+// Name -> Not Empty and longer than 8 characters
+// Description -> Not Empty and longer than 15 characters
+// AssignedTo -> Not Empty and longer than 8 characters
+// DueDate -> Not Empty and not less than current date
+function validateTaskForm(event) { 
+    const inputTitle = document.getElementById("InputTitle");
+    const inputName = document.getElementById("InputName");    
+    const inputDesc = document.getElementById("InputDesc");        
+    const inputDate = document.getElementById("InputDate");
+    const inputStatus = document.getElementById("InputStatus");
+    const userInput = {};
+
+    event.preventDefault();
+
+    if (inputTitle.checkValidity()) {
+        inputTitle.setCustomValidity("");
+        userInput.Title = inputTitle.value;
+    } else {
+        inputTitle.setCustomValidity("minimum 9 characters, please");
+    }
+
+    if (inputName.checkValidity()) {
+        inputName.setCustomValidity("");
+        userInput.AssignedTo = inputName.options[inputName.selectedIndex].text;
+    } else {
+        inputName.setCustomValidity("minmum 9 characters, please");
+    }
+
+    if (inputDesc.checkValidity()) {
+        inputDesc.setCustomValidity("");
+        userInput.Description = inputDesc.value;
+    } else {
+        inputDesc.setCustomValidity("minimum 15 characters, please");
+    }
+
+    if (inputDate.checkValidity()) {
+        inputDate.setCustomValidity("");
+        userInput.dueDate = inputDate.value;
+    } else {
+        inputDate.setCustomValidity("date must be today or future days, please");
+    }
+
+    if (inputStatus.checkValidity()) {
+        inputStatus.setCustomValidity("");
+        userInput.Status = inputStatus.options[inputStatus.selectedIndex].text;
+    } else {
+        inputStatus.setCustomValidity("choose a status, please");
+    }
+
+    createATask(userInput);
+    clearInputsOfCreateTaskForm();
+}
+
+const createATask = (userInput) => {
+    const taskObj = createATaskObj();
+    taskObj.Title = userInput.Title;
+    taskObj.Description = userInput.Description;
+    const [yearValue, monthValue, dayValue] = userInput.dueDate.split('-');
+    taskObj.DueDate ={day: dayValue, month: monthValue, year: yearValue};
+    taskObj.AssignedTo = userInput.AssignedTo;
+    taskObj.Status = userInput.Status;
+
+    addTaskHTML(taskObj);
+    myTaskManager.addTask(taskObj);
+}
 
 function addTaskHTML(task) {
     const itemHTML = `<div id="${task.ID}" class="col mb-4">
