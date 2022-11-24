@@ -134,3 +134,35 @@ addTaskItem(newTask);
 // ------------ END of verifying code
 
 
+const submitTask = document.getElementById("submitTask");
+submitTask.addEventListener("click", validateTaskForm);
+
+const inputTask = document.getElementById("InputTitle");
+inputTask.addEventListener("input", e => {
+    if (!inputTask.checkValidity()) {
+        inputTask.setCustomValidity("Please fill in the title.");
+        console.log("No title made");
+    } else {
+        inputTask.setCustomValidity("");
+    }
+})
+    
+
+
+
+function validateTaskForm() {
+    
+    /*
+    const inputName = document.getElementById("InputName");
+    
+    
+    const inputDesc = document.getElementById("InputDesc");
+    
+    
+    const inputDate = document.getElementById("InputDate");
+    
+    
+    const inputStat = document.getElementById("InputStatus");
+    */
+
+}
