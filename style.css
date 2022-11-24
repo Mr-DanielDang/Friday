@@ -211,4 +211,5 @@ footer li {
     display: inline-block;
     list-style: none;
     color: black;
+    font-size: smaller;
 }
