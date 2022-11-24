@@ -204,10 +204,11 @@ header {
 footer ul {
     background-color: #a88957;
     padding: 10px 5px;
+    margin-bottom: 0em;
 }
 
 footer li {
     display: inline-block;
     list-style: none;
-    color: white;
+    color: black;
 }
