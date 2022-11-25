@@ -51,38 +51,57 @@ function validateTaskForm(event) {
     if (inputTitle.checkValidity()) {
         inputTitle.setCustomValidity("");
         userInput.Title = inputTitle.value;
+        titleText1 = "*Please fill in the title."
     } else {
-        inputTitle.setCustomValidity("minimum 9 characters, please");
+        inputTitle.setCustomValidity("minimum 8 characters, please");
+        titleText2 = "*Title is too short."
     }
+    // Could an "if ... else" statement work?
+    // document.getElementById("titleError").innerHTML = titleText1;
+    document.getElementById("titleError").innerHTML = titleText2;
 
     if (inputName.checkValidity()) {
         inputName.setCustomValidity("");
         userInput.AssignedTo = inputName.options[inputName.selectedIndex].text;
+        assignText = "*Assign a group member."
     } else {
-        inputName.setCustomValidity("minmum 9 characters, please");
+        inputName.setCustomValidity("please assign a group member");
     }
+    document.getElementById("assignError").innerHTML = assignText1;
 
     if (inputDesc.checkValidity()) {
         inputDesc.setCustomValidity("");
         userInput.Description = inputDesc.value;
+        descText1 = "*Please fill in the description."
     } else {
         inputDesc.setCustomValidity("minimum 15 characters, please");
+        descText2 = "*Description is too short."
     }
+    // document.getElementById("descError").innerHTML = descText1;
+    document.getElementById("descError").innerHTML = descText2;
 
     if (inputDate.checkValidity()) {
         inputDate.setCustomValidity("");
         userInput.dueDate = inputDate.value;
+        dateText1 = "*Select a due date."
     } else {
         inputDate.setCustomValidity("date must be today or future days, please");
+        dateText2 = "*Due date must be today or onwards."
     }
+    // document.getElementById("dateError").innerHTML = dateText1;
+    document.getElementById("dateError").innerHTML = dateText2;
 
     if (inputStatus.checkValidity()) {
         inputStatus.setCustomValidity("");
         userInput.Status = inputStatus.options[inputStatus.selectedIndex].text;
+        statusText1 = "*Select a status for the task."
     } else {
         inputStatus.setCustomValidity("choose a status, please");
+        statusText2 = "*Choose a status for task."
     }
-
+    // document.getElementById("statusError").innerHTML = statusText1;
+    document.getElementById("statusError").innerHTML = statusText2;
+    
     createATask(userInput);
     clearInputsOfCreateTaskForm();
 }

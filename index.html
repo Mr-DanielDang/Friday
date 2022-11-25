@@ -39,8 +39,10 @@
                     <!-- Trying to change the colour of the borders -->
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputTitle">TITLE</label>
-                        <input type="text" class="form-control div-taskInputColor2" id="InputTitle" aria-describedby="titleHelp" minlength="9" maxlength="32" required>
+                        <input type="text" class="form-control div-taskInputColor2" id="InputTitle" aria-describedby="titleHelp" minlength="8" required>
+                        <p id="titleError" style="color: red; margin-top: 6px; margin-bottom: -10px; font-style: italic; font-weight: 250;"></p>
                     </div>
+                    
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputName" class="col-auto">ASSIGNED TO:</label>
                         <div class="col-auto">
@@ -50,16 +52,22 @@
                                 <option value="2">Samantha</option>
                                 <option value="3">Daniel</option>
                             </select>
+                        <p id="assignError" style="color: red; margin-top: 6px; margin-bottom: -10px; font-style: italic; font-weight: 250;"></p>
                         </div>
                     </div>
+                    
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputDesc">DESCRIPTION</label>
-                        <textarea class="form-control div-taskInputColor2" id="InputDesc" style="height: 120px;" minlength="16" maxlength="100" required></textarea>
+                        <textarea class="form-control div-taskInputColor2" id="InputDesc" style="height: 120px;" minlength="15" maxlength="100" required></textarea>
+                        <p id="descError" style="color: red; margin-top: 6px; margin-bottom: -10px; font-style: italic; font-weight: 250;"></p>
                     </div>
+                    
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputDate">DATE:</label>
                         <input type="date" id="InputDate" class="form-control div-taskInputColor2" required>
+                        <p id="dateError" style="color: red; margin-top: 6px; margin-bottom: -10px; font-style: italic; font-weight: 250;"></p>
                     </div>
+                    
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputStatus">STATUS</label>
                         <select class="form-control div-taskInputColor2" id="InputStatus" aria-describedby="statusHelp" required>
@@ -69,7 +77,9 @@
                             <option value="3">In Review</option>
                             <option value="4">Done</option> 
                         </select>
+                        <p id="statusError" style="color: red; margin-top: 6px; margin-bottom: -10px; font-style: italic; font-weight: 250;"></p>
                     </div>
+                    
                     <div class="row">
                         <button id="submitTask" class="column bg-primary text-white rounded-pill" style="height: 30; width: 30%; margin-right: 10px; ">
                             <h5>Submit</h5>
@@ -82,6 +92,7 @@
                             <h5>Close</h5>
                         </button>
                     </div>
+
                 </form>
             </section>
 
