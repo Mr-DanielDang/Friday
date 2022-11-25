@@ -1,6 +1,7 @@
 const showCreateTaskForm = () => {
     document.getElementById("create-task").style.display = 'block';
     console.log('Creating task.');
+    const td = new Date();
     // set minimum date as today
     document.getElementById("InputDate").setAttribute('min', td.toISOString().split('T')[0]);        
 }
