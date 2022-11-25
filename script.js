@@ -1,3 +1,10 @@
+const currentDate = new Date();
+const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+
+        document.getElementById("current-date").innerHTML = currentDate.toLocaleDateString('en-au', options);
+        
+        console.log(currentDate.toLocaleDateString('en-au', options));
+
 const showCreateTaskForm = () => {
     document.getElementById("create-task").style.display = 'block';
     console.log('Creating task.');
@@ -243,6 +250,7 @@ class TaskManager {
                                                 </select>  
                                             </div>
                                         </li>
+                                        <button class="delete-button" type="button">Delete task</button>
                                     </ul>                                                                         
                                 </div>
                             </div>
