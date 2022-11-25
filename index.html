@@ -44,12 +44,13 @@
                     <!-- Trying to change the colour of the borders -->
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputTitle">TITLE</label>
-                        <input type="text" class="form-control div-taskInputColor2" id="InputTitle" aria-describedby="titleHelp">
+                        <input type="text" class="form-control div-taskInputColor2" id="InputTitle" aria-describedby="titleHelp" minlength="9" maxlength="32" required>
                     </div>
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputName" class="col-auto">ASSIGNED TO:</label>
                         <div class="col-auto">
-                            <select class="form-control div-taskInputColor2" id="InputName" aria-describedby="nameHelp" aria-placeholder="select a group member">
+                            <select class="form-control div-taskInputColor2" id="InputName" aria-describedby="nameHelp" aria-placeholder="select a group member" required>
+                                <option value="0">--select member--</option>
                                 <option value="1">Jerry</option>
                                 <option value="2">Samantha</option>
                                 <option value="3">Daniel</option>
@@ -58,19 +59,20 @@
                     </div>
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputDesc">DESCRIPTION</label>
-                        <textarea class="form-control div-taskInputColor2" id="InputDesc" style="height: 200px;"></textarea>
+                        <textarea class="form-control div-taskInputColor2" id="InputDesc" style="height: 120px;" minlength="16" maxlength="100" required></textarea>
                     </div>
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputDate">DATE:</label>
-                        <input type="date" id="InputDate" class="form-control div-taskInputColor2">
+                        <input type="date" id="InputDate" class="form-control div-taskInputColor2" required>
                     </div>
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputStatus">STATUS</label>
-                        <select class="form-control div-taskInputColor2" id="InputStatus" aria-describedby="statusHelp">
-                            <option value="1"><small>To Do</small></option>
-                            <option value="2"><small>In Progress</small></option>
-                            <option value="3"><small>In Review</small></option>
-                            <option value="4"><small>Done</small></option> 
+                        <select class="form-control div-taskInputColor2" id="InputStatus" aria-describedby="statusHelp" required>
+                            <option value="0">--select status--</option>
+                            <option value="1">To Do</option>
+                            <option value="2">In Progress</option>
+                            <option value="3">In Review</option>
+                            <option value="4">Done</option> 
                         </select>
                     </div>
                     <div class="row">
