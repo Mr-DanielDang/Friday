@@ -59,6 +59,7 @@ function validateTaskForm(event) {
     if (inputName.checkValidity()) {
         inputName.setCustomValidity("");
         userInput.AssignedTo = inputName.options[inputName.selectedIndex].text;
+        userInput.selectedIndexOfAssignee = inputName.selectedIndex; 
     } else {
         inputName.setCustomValidity("minmum 9 characters, please");
     }
@@ -80,6 +81,7 @@ function validateTaskForm(event) {
     if (inputStatus.checkValidity()) {
         inputStatus.setCustomValidity("");
         userInput.Status = inputStatus.options[inputStatus.selectedIndex].text;
+        userInput.selectedIndexOfStatus = inputStatus.selectedIndex;
     } else {
         inputStatus.setCustomValidity("choose a status, please");
     }
@@ -96,6 +98,8 @@ const createATask = (userInput) => {
     taskObj.DueDate ={day: dayValue, month: monthValue, year: yearValue};
     taskObj.AssignedTo = userInput.AssignedTo;
     taskObj.Status = userInput.Status;
+    taskObj.indexOfAssignee = userInput.selectedIndexOfAssignee;
+    taskObj.indexOfStatus = userInput.selectedIndexOfStatus;
 
     const taskHTML = myTaskManager.addTaskHTML(taskObj);
     myTaskManager.addTask(taskObj);
@@ -108,12 +112,14 @@ const createATaskObj = () => {
         Title: "",
         Description: "",
         AssignedTo: "",
+        indexOfAssignee: 0,
         DueDate: {
             day: 0,
             month: 0,
             year: 0
         },
         Status: "",
+        indexOfStatus: 0,
         cardHeaderBackgrounds: {
             "To Do": "bg-info",
             "In Progress": "bg-warning",
@@ -158,6 +164,19 @@ class TaskManager {
     }
 
     addTaskHTML(task) {
+        // these ideally should be inline with those in Create Task Form in a global scope
+        const assignees = ["Jerry Lin", "Samantha Bijok", "Daniel Dange"];
+        const taskStatus = ["To Do", "In Progress", "In Review", "Done"];
+
+        const assigneeHTML = assignees.map((assignee, index) => {
+            return `<option value="${index + 1}" ${task.indexOfAssignee === index + 1 ? "selected": ""}><small>${assignee}</small></option>`;
+        }).join('\n');
+
+        const statusHTML = taskStatus.map((status, index) => {
+            return `<option value="${index + 1}" ${task.indexOfStatus === index + 1 ? "selected": ""}><small>${status}</small></option>`;
+        }).join('\n');
+        
+
         const itemHTML = `<div id="${task.ID}" class="col mb-4">
                             <div class="card text-start shadow border-2">
                                 <div class="card-header ${task.cardHeaderBackgrounds[task.Status]}"></div>
@@ -177,9 +196,7 @@ class TaskManager {
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
                                                 <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                    <option value="1" selected><small>${task.AssignedTo}</small></option>
-                                                    <option value="2"><small>Samantha</small></option>
-                                                    <option value="3"><small>Daniel</small></option>
+                                                    ${assigneeHTML}
                                                 </select>  
                                             </div>
                                         </li>
@@ -187,10 +204,7 @@ class TaskManager {
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
                                                 <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                    <option value="1" selected><small>${task.Status}</small></option>
-                                                    <option value="2"><small>To Do</small></option>
-                                                    <option value="3"><small>In Review</small></option>
-                                                    <option value="4"><small>Done</small></option>
+                                                    ${statusHTML}
                                                 </select>  
                                             </div>
                                         </li>
