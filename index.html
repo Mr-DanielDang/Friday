@@ -39,22 +39,22 @@
                     <!-- Trying to change the colour of the borders -->
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputTitle">TITLE</label>
-                        <input type="text" class="form-control div-taskInputColor2" id="InputTitle" aria-describedby="titleHelp" minlength="9" maxlength="32" required>
+                        <input type="text" class="form-control div-taskInputColor2" id="InputTitle" aria-describedby="titleHelp" minlength="9" maxlength="60" required>
                     </div>
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputName" class="col-auto">ASSIGNED TO:</label>
                         <div class="col-auto">
                             <select class="form-control div-taskInputColor2" id="InputName" aria-describedby="nameHelp" aria-placeholder="select a group member" required>
                                 <option value="0">--select member--</option>
-                                <option value="1">Jerry</option>
-                                <option value="2">Samantha</option>
-                                <option value="3">Daniel</option>
+                                <option value="1">Jerry Lin</option>
+                                <option value="2">Samantha Bijok</option>
+                                <option value="3">Daniel Dang</option>
                             </select>
                         </div>
                     </div>
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputDesc">DESCRIPTION</label>
-                        <textarea class="form-control div-taskInputColor2" id="InputDesc" style="height: 120px;" minlength="16" maxlength="100" required></textarea>
+                        <textarea class="form-control div-taskInputColor2" id="InputDesc" style="height: 120px;" minlength="16" maxlength="150" required></textarea>
                     </div>
                     <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
                         <label for="InputDate">DATE:</label>
@@ -93,216 +93,7 @@
                     <!-- bootstrap grids -->
                     <div class="container task-container">
                         <div id="card-list" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-5">
-                            <div class="col mb-4">
-                                <div class="card text-start shadow border-2">
-                                    <div class="card-header bg-info"></div>
-                                    <!-- <img src="..." class="card-img-top" alt="..."> -->
-                                    <div class="card-body">
-                                        <h5 class="card-title">Create a Nav bar</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted"><small>Description</small></h6>
-                                        <p class="card-text"><textarea class="form-control" rows="3">Create a Nav bar at the header, adapting to screen sizes.</textarea></p>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-text text-muted"><small>Due Date</small></h6>
-                                                    <input type="date">
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
-                                                    <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                        <option value="1" selected><small>Jerry</small></option>
-                                                        <option value="2"><small>Samantha</small></option>
-                                                        <option value="3"><small>Daniel</small></option>
-                                                    </select>  
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
-                                                    <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                        <option value="1" selected><small>To Do</small></option>
-                                                        <option value="2"><small>In Progress</small></option>
-                                                        <option value="3"><small>In Review</small></option>
-                                                        <option value="4"><small>Done</small></option>
-                                                    </select>  
-                                                </div>
-                                            </li>
-                                          </ul>                                                                         
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col mb-4">
-                                <div class="card text-start shadow border-2">
-                                    <div class="card-header bg-warning"></div>
-                                    <!-- <img src="..." class="card-img-top" alt="..."> -->
-                                    <div class="card-body">
-                                        <h5 class="card-title">Create a footer</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted"><small>Description</small></h6>
-                                        <p class="card-text"><textarea class="form-control" rows="3">Create a footer to include copyright and contact info.</textarea></p>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-text text-muted"><small>Due Date</small></h6>
-                                                    <input type="date" value="2022-11-30">
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
-                                                    <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                        <option value="1"><small>Jerry</small></option>
-                                                        <option value="2" selected><small>Samantha</small></option>
-                                                        <option value="3"><small>Daniel</small></option>
-                                                    </select>  
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
-                                                    <select class="custom-select custom-select-sm modify-1 border-0 text-muted">
-                                                        <option value="1"><small>To Do</small></option>
-                                                        <option value="2" selected><small>In Progress</small></option>
-                                                        <option value="3"><small>In Review</small></option>
-                                                        <option value="4"><small>Done</small></option>
-                                                    </select>  
-                                                </div>
-                                            </li>
-                                          </ul>                                                                         
-                                    </div>
-                                </div>
-                            </div>
-                
-                            <div class="col mb-4">
-                                <div class="card text-start shadow border-2">
-                                    <div class="card-header bg-primary"></div>
-                                    <!-- <img src="..." class="card-img-top" alt="..."> -->
-                                    <div class="card-body">
-                                        <h5 class="card-title">Create a banner</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted"><small>Description</small></h6>
-                                        <p class="card-text"><textarea class="form-control" rows="3">Create a banner under the header. Use an image as background.</textarea></p>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-text text-muted"><small>Due Date</small></h6>
-                                                    <input type="date">
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
-                                                    <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                        <option selected><Small>Daniel</Small></option>
-                                                        <option value="1"><small>Jerry</small></option>
-                                                        <option value="2"><small>Samantha</small></option>
-                                                        <option value="3"><small>Daniel</small></option>
-                                                    </select>  
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
-                                                    <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                        <option selected><small>In Review</small></option>
-                                                        <option value="1"><small>To Do</small></option>
-                                                        <option value="2"><small>In Progress</small></option>
-                                                        <option value="3"><small>In Review</small></option>
-                                                        <option value="4"><small>Done</small></option>
-                                                    </select>  
-                                                </div>
-                                            </li>
-                                          </ul>                                                                         
-                                    </div>
-                                  </div>
-                            </div>
-
-                            <div class="col mb-4">
-                                <div class="card text-start shadow border-2">
-                                    <div class="card-header bg-success"></div>
-                                    <!-- <img src="..." class="card-img-top" alt="..."> -->
-                                    <div class="card-body">
-                                        <h5 class="card-title">Create a task board</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted"><small>Description</small></h6>
-                                        <p class="card-text"><textarea class="form-control" rows="3">Greate a task board to contain tasks for a week. Each task should be shown as a card.</textarea></p>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-text text-muted"><small>Due Date</small></h6>
-                                                    <input type="date">
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
-                                                    <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                        <option selected><small>Samantha</small></option>
-                                                        <option value="1"><small>Jerry</small></option>
-                                                        <option value="2"><small>Samantha</small></option>
-                                                        <option value="3"><small>Daniel</small></option>
-                                                    </select>  
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
-                                                    <select class="custom-select custom-select-sm modify-1 border-0 text-muted">
-                                                        <option selected><small>Done</small></option>
-                                                        <option value="1"><small>To do</small></option>
-                                                        <option value="2"><small>In Progress</small></option>
-                                                        <option value="3"><small>In Review</small></option>
-                                                        <option value="4"><small>Done</small></option>
-                                                    </select>  
-                                                </div>
-                                            </li>
-                                          </ul>                                                                         
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col mb-4">
-                                <div class="card text-start shadow border-2">
-                                    <div class="card-header bg-info"></div>
-                                    <!-- <img src="..." class="card-img-top" alt="..."> -->
-                                    <div class="card-body">
-                                        <h5 class="card-title">Make the header responsive</h5>
-                                        <h6 class="card-subtitle mb-2 text-muted"><small>Description</small></h6>
-                                        <p class="card-text"><textarea class="form-control" rows="3">Make the header responsive to screen sizes. Breakpoints should includde widths of 450px, 768px and 1024px.</textarea></p>
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-text text-muted"><small>Due Date</small></h6>
-                                                    <input type="date">
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
-                                                    <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                        <option selected>Daniel</option>
-                                                        <option value="1"><small>Jerry</small></option>
-                                                        <option value="2"><small>Samantha</small></option>
-                                                        <option value="3"><small>Daniel</small></option>
-                                                    </select>  
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item p-0">
-                                                <div class="d-flex justify-content-between align-items-baseline">
-                                                    <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
-                                                    <select class="custom-select custom-select-sm modify-1 border-0 text-muted">
-                                                        <option selected><small>To do</small></option>
-                                                        <option value="1"><small>To do</small></option>
-                                                        <option value="2"><small>In Progress</small></option>
-                                                        <option value="3"><small>In Review</small></option>
-                                                        <option value="4"><small>Done</small></option>
-                                                    </select>  
-                                                </div>
-                                            </li>
-                                          </ul>                                                                         
-                                    </div>
-                                </div>
-                              </div>
+                            <!-- cards for tasks would be added programatically according to user input -->
                         </div>  
                     </div> 
                   </div>
