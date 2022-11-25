@@ -1,6 +1,7 @@
 const showCreateTaskForm = () => {
     document.getElementById("create-task").style.display = 'block';
     console.log('Creating task.');
+    const td = new Date();
     // set minimum date as today
     document.getElementById("InputDate").setAttribute('min', td.toISOString().split('T')[0]);        
 }
@@ -96,54 +97,9 @@ const createATask = (userInput) => {
     taskObj.AssignedTo = userInput.AssignedTo;
     taskObj.Status = userInput.Status;
 
-    addTaskHTML(taskObj);
+    const taskHTML = myTaskManager.addTaskHTML(taskObj);
     myTaskManager.addTask(taskObj);
-}
-
-function addTaskHTML(task) {
-    const itemHTML = `<div id="${task.ID}" class="col mb-4">
-                        <div class="card text-start shadow border-2">
-                            <div class="card-header ${task.cardHeaderBackgrounds[task.Status]}"></div>
-                            <!-- <img src="..." class="card-img-top" alt="..."> -->
-                            <div class="card-body">
-                                <h5 class="card-title">${task.Title}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted"><small>Description</small></h6>
-                                <p class="card-text"><textarea class="form-control" rows="3">${task.Description}</textarea></p>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item p-0">
-                                        <div class="d-flex justify-content-between align-items-baseline">
-                                            <h6 class="card-text text-muted"><small>Due Date</small></h6>
-                                            <input type="date" value="${task.DueDate.year}-${task.DueDate.month}-${task.DueDate.day}">
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item p-0">
-                                        <div class="d-flex justify-content-between align-items-baseline">
-                                            <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
-                                            <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                <option value="1" selected><small>${task.AssignedTo}</small></option>
-                                                <option value="2"><small>Samantha</small></option>
-                                                <option value="3"><small>Daniel</small></option>
-                                            </select>  
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item p-0">
-                                        <div class="d-flex justify-content-between align-items-baseline">
-                                            <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
-                                            <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                <option value="1" selected><small>${task.Status}</small></option>
-                                                <option value="2"><small>To Do</small></option>
-                                                <option value="3"><small>In Review</small></option>
-                                                <option value="4"><small>Done</small></option>
-                                            </select>  
-                                        </div>
-                                    </li>
-                                </ul>                                                                         
-                            </div>
-                        </div>
-                    </div>`;
-
-    const itemContainer = document.getElementById("card-list");
-    itemContainer.innerHTML += itemHTML;
+    myTaskManager.renderTask(taskHTML);
 }
 
 const createATaskObj = () => {
@@ -201,6 +157,51 @@ class TaskManager {
         localStorage.setItem(`friday${task.ID}`, taskStr);
     }
 
+    addTaskHTML(task) {
+        const itemHTML = `<div id="${task.ID}" class="col mb-4">
+                            <div class="card text-start shadow border-2">
+                                <div class="card-header ${task.cardHeaderBackgrounds[task.Status]}"></div>
+                                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                                <div class="card-body">
+                                    <h5 class="card-title">${task.Title}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted"><small>Description</small></h6>
+                                    <p class="card-text"><textarea class="form-control" rows="3">${task.Description}</textarea></p>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item p-0">
+                                            <div class="d-flex justify-content-between align-items-baseline">
+                                                <h6 class="card-text text-muted"><small>Due Date</small></h6>
+                                                <input type="date" value="${task.DueDate.year}-${task.DueDate.month}-${task.DueDate.day}">
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="d-flex justify-content-between align-items-baseline">
+                                                <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
+                                                <select class="custom-select custom-select-sm my-1 border-0 text-muted">
+                                                    <option value="1" selected><small>${task.AssignedTo}</small></option>
+                                                    <option value="2"><small>Samantha</small></option>
+                                                    <option value="3"><small>Daniel</small></option>
+                                                </select>  
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item p-0">
+                                            <div class="d-flex justify-content-between align-items-baseline">
+                                                <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
+                                                <select class="custom-select custom-select-sm my-1 border-0 text-muted">
+                                                    <option value="1" selected><small>${task.Status}</small></option>
+                                                    <option value="2"><small>To Do</small></option>
+                                                    <option value="3"><small>In Review</small></option>
+                                                    <option value="4"><small>Done</small></option>
+                                                </select>  
+                                            </div>
+                                        </li>
+                                    </ul>                                                                         
+                                </div>
+                            </div>
+                        </div>`;
+    
+        return itemHTML;
+    }
+
     loadStoredTasks() {
         const regex = /friday\d+/;
         for (let index = 0; index < localStorage.length; index++) {
@@ -216,6 +217,18 @@ class TaskManager {
         }
     }
 
+    renderTask (taskHTML) {
+        const itemContainer = document.getElementById("card-list");
+        itemContainer.innerHTML += taskHTML;    
+    }
+
+    addAllTaskItemsFromLocalStorage (allTasks) {
+        allTasks.forEach(task => {
+            const tHTML = this.addTaskHTML(task);
+            this.renderTask(tHTML);
+        });
+    }
+
     removeTask (taskID) {
 
     }
@@ -225,14 +238,20 @@ class TaskManager {
     }
 }
 
-const addAllTaskItemsFromLocalStorage = (tasks) => {
-    tasks.forEach(task => addTaskHTML(task));
-};
-
 const myTaskManager = new TaskManager("group5");
 myTaskManager.loadStoredTasks();
 console.log("All tasks: \n")
 console.log(myTaskManager.getAllTasks);
+
+const allTasks = myTaskManager.getAllTasks;
+const idArray = allTasks.map(task => task.ID);
+if (idArray.length > 0) {
+    const maxId = Math.max(...idArray);
+    console.log(`max ID used last time: ${maxId}`);
+    myTaskManager.initiateCurrentId(maxId);
+}
+
+myTaskManager.addAllTaskItemsFromLocalStorage(allTasks);
 
 // ----------- this following code snippet is just for verifying the functions of class TaskManger
 // and the addTaskItem function. Next, tasks will be created and added into the Task List and the Task Board
@@ -257,12 +276,4 @@ console.log(myTaskManager.getAllTasks);
 // console.log(myTaskManager.getAllTasks);
 // ------------ END of verifying code
 
-const allTasks = myTaskManager.getAllTasks;
-const idArray = allTasks.map(task => task.ID);
-if (idArray.length > 0) {
-    const maxId = Math.max(...idArray);
-    console.log(`max ID used last time: ${maxId}`);
-    myTaskManager.initiateCurrentId(maxId);
-}
 
-addAllTaskItemsFromLocalStorage(allTasks);
