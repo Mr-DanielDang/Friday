@@ -59,7 +59,7 @@ function validateTaskForm(event) {
     if (inputName.checkValidity()) {
         inputName.setCustomValidity("");
         userInput.AssignedTo = inputName.options[inputName.selectedIndex].text;
-        userInput.selectedIndexOfAssignee = inputName.selectedIndex; 
+        userInput.selectedIndexOfAssignee = inputName.selectedIndex > 0? inputName.selectedIndex -1 : 0; 
     } else {
         inputName.setCustomValidity("minmum 9 characters, please");
     }
@@ -81,7 +81,7 @@ function validateTaskForm(event) {
     if (inputStatus.checkValidity()) {
         inputStatus.setCustomValidity("");
         userInput.Status = inputStatus.options[inputStatus.selectedIndex].text;
-        userInput.selectedIndexOfStatus = inputStatus.selectedIndex;
+        userInput.selectedIndexOfStatus = inputStatus.selectedIndex > 0? inputStatus.selectedIndex - 1 : 0;
     } else {
         inputStatus.setCustomValidity("choose a status, please");
     }
@@ -90,8 +90,36 @@ function validateTaskForm(event) {
     clearInputsOfCreateTaskForm();
 }
 
+function onCardStatusChange(event) {
+    event.preventDefault();
+    const cardHeaderBackgrounds = {
+        "To Do": "bg-info",
+        "In Progress": "bg-warning",
+        "In Review": "bg-primary",
+        "Done": "bg-success"
+    };
+    const taskStatusId = event.target.id; // e.g. friday05
+    // grap the number only from, e.g. friday05
+    const taskId = taskStatusId.substring(6);
+    const taskStatusValue = event.target.options[event.target.selectedIndex].text;
+    const targetCard = document.getElementById(`card-header${taskId}`);
+    targetCard.classList.remove("bg-info");
+    targetCard.classList.remove("bg-warning");
+    targetCard.classList.remove("bg-primary");
+    targetCard.classList.remove("bg-success");
+    targetCard.classList.add(cardHeaderBackgrounds[taskStatusValue]);
+
+    const taskValues = {
+        taskKey: taskStatusId,
+        Status: taskStatusValue,
+        indexOfStatus: event.target.selectedIndex
+    };
+
+    myTaskManager.updateTaskStatus(taskValues);
+} 
+
 const createATask = (userInput) => {
-    const taskObj = createATaskObj();
+    const taskObj = createATaskObj(myTaskManager.currentID);
     taskObj.Title = userInput.Title;
     taskObj.Description = userInput.Description;
     const [yearValue, monthValue, dayValue] = userInput.dueDate.split('-');
@@ -106,9 +134,9 @@ const createATask = (userInput) => {
     myTaskManager.renderTask(taskHTML);
 }
 
-const createATaskObj = () => {
+const createATaskObj = (id) => {
     return {
-        ID: 0,
+        ID: id,
         Title: "",
         Description: "",
         AssignedTo: "",
@@ -134,6 +162,10 @@ class TaskManager {
         this._user = user;
         this._tasks = [];
         this._currentID = 0;
+    }
+
+    get currentID () {
+        return this._currentID;
     }
 
     get getAllTasks () {
@@ -165,21 +197,24 @@ class TaskManager {
 
     addTaskHTML(task) {
         // these ideally should be inline with those in Create Task Form in a global scope
-        const assignees = ["Jerry Lin", "Samantha Bijok", "Daniel Dange"];
+        const assignees = ["Jerry Lin", "Samantha Bijok", "Daniel Dang"];
         const taskStatus = ["To Do", "In Progress", "In Review", "Done"];
 
-        const assigneeHTML = assignees.map((assignee, index) => {
-            return `<option value="${index + 1}" ${task.indexOfAssignee === index + 1 ? "selected": ""}><small>${assignee}</small></option>`;
-        }).join('\n');
+        let assigneeHTML = "";
+        for (let index = 0; index < assignees.length; index++) {
+            assigneeHTML += `<option value="${index + 1}" ${task.indexOfAssignee === index ? "selected": ""}><small>${assignees[index]}</small></option>\n`;
+        }
+        assigneeHTML += '\n';
 
-        const statusHTML = taskStatus.map((status, index) => {
-            return `<option value="${index + 1}" ${task.indexOfStatus === index + 1 ? "selected": ""}><small>${status}</small></option>`;
-        }).join('\n');
-        
+        let statusHTML = "";
+        for (let index = 0; index < taskStatus.length; index++) {
+            statusHTML += `<option value="${index + 1}" ${task.indexOfStatus === index ? "selected": ""}><small>${taskStatus[index]}</small></option>\n`;
+        }
+        statusHTML += '\n';
 
         const itemHTML = `<div id="${task.ID}" class="col mb-4">
                             <div class="card text-start shadow border-2">
-                                <div class="card-header ${task.cardHeaderBackgrounds[task.Status]}"></div>
+                                <div id="card-header${task.ID}" class="card-header ${task.cardHeaderBackgrounds[task.Status]}"></div>
                                 <!-- <img src="..." class="card-img-top" alt="..."> -->
                                 <div class="card-body">
                                     <h5 class="card-title">${task.Title}</h5>
@@ -203,7 +238,7 @@ class TaskManager {
                                         <li class="list-group-item p-0">
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
-                                                <select class="custom-select custom-select-sm my-1 border-0 text-muted">
+                                                <select id="friday${task.ID}" onchange="onCardStatusChange(event)" class="custom-select custom-select-sm my-1 border-0 text-muted">
                                                     ${statusHTML}
                                                 </select>  
                                             </div>
@@ -214,6 +249,15 @@ class TaskManager {
                         </div>`;
     
         return itemHTML;
+    }
+
+    updateTaskStatus (taskValues) {
+        const storedItem = localStorage.getItem(taskValues.taskKey);
+        const taskObj = JSON.parse(storedItem);
+        taskObj.Status = taskValues.Status;
+        taskObj.indexOfStatus = taskValues.indexOfStatus;
+        const taskStr = JSON.stringify(taskObj);
+        localStorage.setItem(taskValues.taskKey, taskStr);
     }
 
     loadStoredTasks() {
@@ -262,32 +306,8 @@ const idArray = allTasks.map(task => task.ID);
 if (idArray.length > 0) {
     const maxId = Math.max(...idArray);
     console.log(`max ID used last time: ${maxId}`);
-    myTaskManager.initiateCurrentId(maxId);
+    myTaskManager.initiateCurrentId(maxId + 1);
 }
 
 myTaskManager.addAllTaskItemsFromLocalStorage(allTasks);
-
-// ----------- this following code snippet is just for verifying the functions of class TaskManger
-// and the addTaskItem function. Next, tasks will be created and added into the Task List and the Task Board
-// by the user
-// const newTask = createATaskObj();
-// newTask.Title = "Add current date in banner";
-// newTask.Description = "In the Banner, between the heading and the Create Task buttion, add a display of the current date in a user friendly form.";
-// newTask.DueDate ={day: 24, month: 11, year: 2022};
-// newTask.AssignedTo = "Samantha";
-// newTask.Status = "In Progress";
-// console.log(newTask);
-
-// myTaskManager.addTask(newTask);
-// console.log("all tasks:\n");
-// console.log(myTaskManager.getAllTasks);
-// console.log(myTaskManager.getTasksWithStatus("In Progress"));
-
-// addTaskHTML(newTask);
-
-// myTaskManager.loadStoredTasks();
-// console.log("load again All tasks: \n")
-// console.log(myTaskManager.getAllTasks);
-// ------------ END of verifying code
-
 
