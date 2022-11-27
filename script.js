@@ -7,10 +7,10 @@ console.log(currentDate.toLocaleDateString('en-au', options));
 
 const clearInputsOfCreateTaskForm = () => {
     document.getElementById("InputTitle").value = "";
-    document.getElementById("InputName").value = "";
+    document.getElementById("InputName").selectedIndex = 0;
     document.getElementById("InputDesc").value = "";        
     document.getElementById("InputDate").value = "";
-    document.getElementById("InputStatus").value = "";
+    document.getElementById("InputStatus").selectedIndex = 0;       
 }
 
 const showError = (elementId) => {
