@@ -1,30 +1,133 @@
 const currentDate = new Date();
 const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 
-        document.getElementById("current-date").innerHTML = currentDate.toLocaleDateString('en-au', options);
-        
-        console.log(currentDate.toLocaleDateString('en-au', options));
+document.getElementById("current-date").innerHTML = currentDate.toLocaleDateString('en-au', options);
+
+console.log(currentDate.toLocaleDateString('en-au', options));
+
+const clearInputsOfCreateTaskForm = () => {
+    document.getElementById("InputTitle").value = "";
+    document.getElementById("InputName").selectedIndex = 0;
+    document.getElementById("InputDesc").value = "";        
+    document.getElementById("InputDate").value = "";
+    document.getElementById("InputStatus").selectedIndex = 0;       
+}
+
+const showError = (elementId) => {
+    const referredElement = document.getElementById(elementId);
+    const referredErrorSpan = document.querySelector(`#${elementId} + span.error`);
+
+    switch (elementId) {
+        case "InputTitle":
+            {
+                if (referredElement.validity.valueMissing) {
+                    // If the field is empty, display the following error message.
+                    referredErrorSpan.textContent = `please input a title, minimum ${referredElement.minLength} characters`;
+                } else if ((referredElement.validity.tooShort) || (referredElement.value.length < 9)) {
+                    // If the data is too short, display the following error message.
+                    console.log(referredErrorSpan.textContent);
+                    console.log(referredElement.minLength);
+                    console.log(referredElement.value.length);
+                    referredErrorSpan.textContent = `Title should be at least ${referredElement.minLength} characters; you entered ${referredElement.value.length}`;
+                } 
+
+                // Set the styling appropriately
+                referredErrorSpan.className = "error active";
+            }
+            break;
+        case "InputName":
+            {
+                if (referredElement.value === "0") {
+                    // If an assignee was not selected, display the following error message.
+                    referredErrorSpan.textContent = "please choose one assignee from the dropdown list";
+                }
+
+                // Set the styling appropriately
+                referredErrorSpan.className = "error active";
+            }
+            break;
+        case "InputDesc":
+            {
+                if (referredElement.validity.valueMissing) {
+                    // If the field is empty, display the following error message.
+                    referredErrorSpan.textContent = `please input description, minimum ${referredElement.minLength} characters`;
+                } else if ((referredElement.validity.tooShort) || (referredElement.value.length < 16)) {
+                    // If the data is too short, display the following error message.
+                    referredErrorSpan.textContent = `Title should be at least ${referredElement.minLength} characters; you entered ${referredElement.value.length}`;
+                }
+
+                // Set the styling appropriately
+                referredErrorSpan.className = "error active";                
+            }
+            break;
+        case "InputDate":
+            {
+                const dateOfToday = new Date();
+
+                if ((referredElement.value === "") || (referredElement.valueAsNumber < dateOfToday.getTime())) {
+                    // If the set date is less than today.
+                    referredErrorSpan.textContent = `please choose a date not less than ${dateOfToday.toISOString().split('T')[0]}`;
+                }
+
+                // Set the styling appropriately
+                referredErrorSpan.className = "error active";                
+            }
+            break;
+        case "InputStatus":
+            {
+                if (referredElement.value === "0") {
+                    // If an assignee was not selected, display the following error message.
+                    referredErrorSpan.textContent = "please choose one status from the dropdown list";
+                }
+
+                // Set the styling appropriately
+                referredErrorSpan.className = "error active";
+            }
+            break;
+        default:
+            break;
+    }   
+};
+
+const setEventListener = (elementId, nameOfEvent) => {
+    const referredElement = document.getElementById(elementId);
+    const referredErrorSpan = document.querySelector(`#${elementId} + span.error`);
+
+    referredElement.addEventListener(nameOfEvent, (event) => {
+        // Each time the user types something, we check if the form fields are valid.
+        if (referredElement.validity.valid) {
+            // In case there is an error message visible, if the field is valid, we remove the error message.
+            referredErrorSpan.textContent = ""; // Reset the content of the message
+            referredErrorSpan.className = "error"; // Reset the visual state of the message
+        } else {
+            // If there is still an error, show the correct error
+            showError(elementId);
+        }   
+    });
+}
 
 const showCreateTaskForm = () => {
     document.getElementById("create-task").style.display = 'block';
     console.log('Creating task.');
     const td = new Date();
     // set minimum date as today
-    document.getElementById("InputDate").setAttribute('min', td.toISOString().split('T')[0]);        
+    document.getElementById("InputDate").setAttribute('min', td.toISOString().split('T')[0]);
+    
+    // set event listener to 'input' event for all input fileds
+    setEventListener("InputTitle", 'input');
+    setEventListener("InputName", "input");
+    setEventListener("InputDesc", "input");
+    setEventListener("InputDate", "input");
+    setEventListener("InputStatus", "input");
 }
 
-const resetCreateTaskForm = () => {
+const resetCreateTaskForm = (e) => {
     document.getElementById("create-task").style.display = 'block';
+    clearInputsOfCreateTaskForm();
+    e.preventDefault();
     console.log('Resetting create task.');
 }
 
-const clearInputsOfCreateTaskForm = () => {
-    document.getElementById("InputTitle").value = "";
-    document.getElementById("InputName").value = "";
-    document.getElementById("InputDesc").value = "";        
-    document.getElementById("InputDate").value = "";
-    document.getElementById("InputStatus").value = "";        
-}
 const closeCreateTaskForm = () => {
     document.getElementById("create-task").style.display = 'none';
     console.log('Closing task.');
@@ -53,63 +156,88 @@ function validateTaskForm(event) {
     const inputDate = document.getElementById("InputDate");
     const inputStatus = document.getElementById("InputStatus");
     const userInput = {};
+    let thereIsError = false;
 
-    event.preventDefault();
-
-    if (inputTitle.checkValidity()) {
-        inputTitle.setCustomValidity("");
+    if ((inputTitle.validity.valid) && (inputTitle.value.length > 8)) {
         userInput.Title = inputTitle.value;
-        titleText1 = "*Please fill in the title."
+        inputTitle.classList.add('valid');
+        console.log("Title valid");
     } else {
-        inputTitle.setCustomValidity("minimum 8 characters, please");
-        titleText2 = "*Title is too short."
+        console.log("Title invalid!");
+        // display an appropriate error message
+        showError("InputTitle");
+        // prevent the form from being sent by canceling the event
+        event.preventDefault();
+        thereIsError = true;
     }
     // Could an "if ... else" statement work?
     // document.getElementById("titleError").innerHTML = titleText1;
     document.getElementById("titleError").innerHTML = titleText2;
 
-    if (inputName.checkValidity()) {
-        inputName.setCustomValidity("");
+    if ((inputName.value !== "0")  && (inputName.options[inputName.selectedIndex].text.length > 8)){
         userInput.AssignedTo = inputName.options[inputName.selectedIndex].text;
-        userInput.selectedIndexOfAssignee = inputName.selectedIndex > 0? inputName.selectedIndex -1 : 0; 
+        userInput.selectedIndexOfAssignee = inputName.selectedIndex > 0? inputName.selectedIndex - 1 : 0; 
+        inputName.classList.add("valid");
+        console.log("Assignee valid");
     } else {
-        inputName.setCustomValidity("please assign a group member");
+        console.log("Assignee invalid!");
+        // display an appropriate error message
+        showError("InputName");
+        // prevent the form from being sent by canceling the event
+        event.preventDefault();
+        thereIsError = true;
     }
     document.getElementById("assignError").innerHTML = assignText1;
 
-    if (inputDesc.checkValidity()) {
-        inputDesc.setCustomValidity("");
+    if ((inputDesc.validity.valid) && (inputDesc.value.length > 15)) {
         userInput.Description = inputDesc.value;
-        descText1 = "*Please fill in the description."
+        inputDesc.classList.add("valid");
+        console.log("Description valid");
     } else {
-        inputDesc.setCustomValidity("minimum 15 characters, please");
-        descText2 = "*Description is too short."
+        console.log("Description invalid!");
+        // display an appropriate error message
+        showError("InputDesc");
+        // prevent the form from being sent by canceling the event
+        event.preventDefault();
+        thereIsError = true;
     }
     // document.getElementById("descError").innerHTML = descText1;
     document.getElementById("descError").innerHTML = descText2;
 
-    if (inputDate.checkValidity()) {
-        inputDate.setCustomValidity("");
+    if (inputDate.validity.valid) {
         userInput.dueDate = inputDate.value;
-        dateText1 = "*Select a due date."
+        inputDate.classList.add("valid");
+        console.log("Due date valid");
     } else {
-        inputDate.setCustomValidity("date must be today or future days, please");
-        dateText2 = "*Due date must be today or onwards."
+        console.log("Due date invalid!");
+        // display an appropriate error message
+        showError("InputDate");
+        // prevent the form from being sent by canceling the event
+        event.preventDefault();
+        thereIsError = true;
     }
     // document.getElementById("dateError").innerHTML = dateText1;
     document.getElementById("dateError").innerHTML = dateText2;
 
-    if (inputStatus.checkValidity()) {
-        inputStatus.setCustomValidity("");
+    if (inputStatus.value !== "0") {
         userInput.Status = inputStatus.options[inputStatus.selectedIndex].text;
         userInput.selectedIndexOfStatus = inputStatus.selectedIndex > 0? inputStatus.selectedIndex - 1 : 0;
+        inputStatus.classList.add("valid");
+        console.log("Status valid");
     } else {
-        inputStatus.setCustomValidity("choose a status, please");
-        statusText2 = "*Choose a status for task."
+        console.log("Status invalid!");
+        // display an appropriate error message
+        showError("InputStatus");
+        // prevent the form from being sent by canceling the event
+        event.preventDefault();
+        thereIsError = true;
     }
-    // document.getElementById("statusError").innerHTML = statusText1;
-    document.getElementById("statusError").innerHTML = statusText2;
-    
+
+    if (thereIsError === true) {
+        return;
+    }
+
+    console.log("To create a task ...\n");
     createATask(userInput);
     clearInputsOfCreateTaskForm();
 }
