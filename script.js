@@ -71,11 +71,7 @@ function validateTaskForm(event) {
     if (inputName.checkValidity()) {
         inputName.setCustomValidity("");
         userInput.AssignedTo = inputName.options[inputName.selectedIndex].text;
-<<<<<<< HEAD
-        assignText = "*Assign a group member."
-=======
         userInput.selectedIndexOfAssignee = inputName.selectedIndex > 0? inputName.selectedIndex -1 : 0; 
->>>>>>> 4bfc1b04e90dc5b6753ba9bfa119c9a322908cd6
     } else {
         inputName.setCustomValidity("please assign a group member");
     }
@@ -106,11 +102,7 @@ function validateTaskForm(event) {
     if (inputStatus.checkValidity()) {
         inputStatus.setCustomValidity("");
         userInput.Status = inputStatus.options[inputStatus.selectedIndex].text;
-<<<<<<< HEAD
-        statusText1 = "*Select a status for the task."
-=======
         userInput.selectedIndexOfStatus = inputStatus.selectedIndex > 0? inputStatus.selectedIndex - 1 : 0;
->>>>>>> 4bfc1b04e90dc5b6753ba9bfa119c9a322908cd6
     } else {
         inputStatus.setCustomValidity("choose a status, please");
         statusText2 = "*Choose a status for task."
