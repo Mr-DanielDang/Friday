@@ -10,7 +10,7 @@ const clearInputsOfCreateTaskForm = () => {
     document.getElementById("InputName").value = "";
     document.getElementById("InputDesc").value = "";        
     document.getElementById("InputDate").value = "";
-    document.getElementById("InputStatus").value = "";        
+    document.getElementById("InputStatus").value = "";
 }
 
 const showError = (elementId) => {
@@ -23,8 +23,11 @@ const showError = (elementId) => {
                 if (referredElement.validity.valueMissing) {
                     // If the field is empty, display the following error message.
                     referredErrorSpan.textContent = `please input a title, minimum ${referredElement.minLength} characters`;
-                } else if (referredElement.validity.tooShort) {
+                } else if ((referredElement.validity.tooShort) || (referredElement.value.length < 9)) {
                     // If the data is too short, display the following error message.
+                    console.log(referredErrorSpan.textContent);
+                    console.log(referredElement.minLength);
+                    console.log(referredElement.value.length);
                     referredErrorSpan.textContent = `Title should be at least ${referredElement.minLength} characters; you entered ${referredElement.value.length}`;
                 } 
 
@@ -48,7 +51,7 @@ const showError = (elementId) => {
                 if (referredElement.validity.valueMissing) {
                     // If the field is empty, display the following error message.
                     referredErrorSpan.textContent = `please input description, minimum ${referredElement.minLength} characters`;
-                } else if (referredElement.validity.tooShort) {
+                } else if ((referredElement.validity.tooShort) || (referredElement.value.length < 16)) {
                     // If the data is too short, display the following error message.
                     referredErrorSpan.textContent = `Title should be at least ${referredElement.minLength} characters; you entered ${referredElement.value.length}`;
                 }
@@ -95,7 +98,7 @@ const setEventListener = (elementId, nameOfEvent) => {
         if (referredElement.validity.valid) {
             // In case there is an error message visible, if the field is valid, we remove the error message.
             referredErrorSpan.textContent = ""; // Reset the content of the message
-            referredErrorSpan.className = ""; // Reset the visual state of the message
+            referredErrorSpan.className = "error"; // Reset the visual state of the message
         } else {
             // If there is still an error, show the correct error
             showError(elementId);
@@ -155,10 +158,12 @@ function validateTaskForm(event) {
     const userInput = {};
     let thereIsError = false;
 
-    if (inputTitle.validity.valid) {
+    if ((inputTitle.validity.valid) && (inputTitle.value.length > 8)) {
         userInput.Title = inputTitle.value;
         inputTitle.classList.add('valid');
+        console.log("Title valid");
     } else {
+        console.log("Title invalid!");
         // display an appropriate error message
         showError("InputTitle");
         // prevent the form from being sent by canceling the event
@@ -170,7 +175,9 @@ function validateTaskForm(event) {
         userInput.AssignedTo = inputName.options[inputName.selectedIndex].text;
         userInput.selectedIndexOfAssignee = inputName.selectedIndex > 0? inputName.selectedIndex - 1 : 0; 
         inputName.classList.add("valid");
+        console.log("Assignee valid");
     } else {
+        console.log("Assignee invalid!");
         // display an appropriate error message
         showError("InputName");
         // prevent the form from being sent by canceling the event
@@ -178,10 +185,12 @@ function validateTaskForm(event) {
         thereIsError = true;
     }
 
-    if (inputDesc.validity.valid) {
+    if ((inputDesc.validity.valid) && (inputDesc.value.length > 15)) {
         userInput.Description = inputDesc.value;
         inputDesc.classList.add("valid");
+        console.log("Description valid");
     } else {
+        console.log("Description invalid!");
         // display an appropriate error message
         showError("InputDesc");
         // prevent the form from being sent by canceling the event
@@ -192,7 +201,9 @@ function validateTaskForm(event) {
     if (inputDate.validity.valid) {
         userInput.dueDate = inputDate.value;
         inputDate.classList.add("valid");
+        console.log("Due date valid");
     } else {
+        console.log("Due date invalid!");
         // display an appropriate error message
         showError("InputDate");
         // prevent the form from being sent by canceling the event
@@ -204,7 +215,9 @@ function validateTaskForm(event) {
         userInput.Status = inputStatus.options[inputStatus.selectedIndex].text;
         userInput.selectedIndexOfStatus = inputStatus.selectedIndex > 0? inputStatus.selectedIndex - 1 : 0;
         inputStatus.classList.add("valid");
+        console.log("Status valid");
     } else {
+        console.log("Status invalid!");
         // display an appropriate error message
         showError("InputStatus");
         // prevent the form from being sent by canceling the event
@@ -216,6 +229,7 @@ function validateTaskForm(event) {
         return;
     }
 
+    console.log("To create a task ...\n");
     createATask(userInput);
     clearInputsOfCreateTaskForm();
 }
