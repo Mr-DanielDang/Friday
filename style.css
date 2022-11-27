@@ -140,15 +140,18 @@ header {
     border: none;
 }
 
-.row {
-    align-items: center;
+#btns-create-task {
     justify-content: center;
-    padding-top: 12px;
+    padding-top: 5px;
 }
 
 .div-borderColor {
     border-color: #705b3a;
 }  
+
+.form-control {
+    padding: 0 0.75rem;
+}
 
 .create-task {
     position: fixed;
@@ -157,10 +160,12 @@ header {
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);    
     background-color: var(--background-color-inprogress);
-    padding: 1rem;
+    padding: 0.8rem;
+    border-radius: 0.3rem;
     width: 40%;
     height: auto;
     z-index: 200;
+    font-size: 1rem;
 }
 
 .task-board {

@@ -42,12 +42,12 @@
 
                 <form>
                     <!-- Trying to change the colour of the borders -->
-                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
-                        <label for="InputTitle">TITLE</label>
+                    <div class="container-md border border-3 div-borderColor div-taskInputColor" style="padding: 5px;">
+                        <label for="InputTitle">Title</label>
                         <input type="text" class="form-control div-taskInputColor2" id="InputTitle" aria-describedby="titleHelp" minlength="9" maxlength="60" required>
                     </div>
-                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
-                        <label for="InputName" class="col-auto">ASSIGNED TO:</label>
+                    <div class="container-md border border-3 border-top-0 div-borderColor div-taskInputColor" style="padding: 5px;">
+                        <label for="InputName" class="col-auto">Assigned To:</label>
                         <div class="col-auto">
                             <select class="form-control div-taskInputColor2" id="InputName" aria-describedby="nameHelp" aria-placeholder="select a group member" required>
                                 <option value="0">--select member--</option>
@@ -57,16 +57,16 @@
                             </select>
                         </div>
                     </div>
-                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
-                        <label for="InputDesc">DESCRIPTION</label>
+                    <div class="container-md border border-3 border-top-0 div-borderColor div-taskInputColor" style="padding: 5px;">
+                        <label for="InputDesc">Description</label>
                         <textarea class="form-control div-taskInputColor2" id="InputDesc" style="height: 120px;" minlength="16" maxlength="150" required></textarea>
                     </div>
-                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
-                        <label for="InputDate">DATE:</label>
+                    <div class="container-md border border-3 border-top-0 div-borderColor div-taskInputColor" style="padding: 5px;">
+                        <label for="InputDate">Due Date:</label>
                         <input type="date" id="InputDate" class="form-control div-taskInputColor2" required>
                     </div>
-                    <div class="container-md border border-4 div-borderColor div-taskInputColor" style="padding: 5px 5px 10px 5px;">
-                        <label for="InputStatus">STATUS</label>
+                    <div class="container-md border border-3 border-top-0 div-borderColor div-taskInputColor" style="padding: 5px;">
+                        <label for="InputStatus">Status</label>
                         <select class="form-control div-taskInputColor2" id="InputStatus" aria-describedby="statusHelp" required>
                             <option value="0">--select status--</option>
                             <option value="1">To Do</option>
@@ -75,16 +75,16 @@
                             <option value="4">Done</option> 
                         </select>
                     </div>
-                    <div class="row">
+                    <div class="row" id="btns-create-task">
                         <button id="submitTask" class="column bg-primary text-white rounded-pill" style="height: 30; width: 30%; margin-right: 10px; ">
-                            <h5>Submit</h5>
+                            Submit
                         </button>
                         <!-- Reset refreshes the webpage -->
                         <button id="resetTask" class="column bg-secondary text-white rounded-pill" style="height: 30; width: 30%; margin-right: 10px;">
-                            <h5>Reset</h5>
+                            Reset
                         </button>
                         <button id="closeTask" class="column bg-dark text-white rounded-pill" style="height: 30; width: 30%;">
-                            <h5>Close</h5>
+                            Close
                         </button>
                     </div>
                 </form>
@@ -107,8 +107,10 @@
         <footer>
             <ul>
                 <li style="color: white">&copy Friday.com</li>
-                <li>|    Design   by   JerDanSam    |</li>
-                <li>Oct 2022</li>
+                <li>|</li>
+                <li>Design   by   JerDanSam</li>
+                <li>|</li>
+                <li>2022</li>
             </ul>
         </footer>
     </body>
