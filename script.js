@@ -1,30 +1,133 @@
 const currentDate = new Date();
 const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
 
-        document.getElementById("current-date").innerHTML = currentDate.toLocaleDateString('en-au', options);
-        
-        console.log(currentDate.toLocaleDateString('en-au', options));
+document.getElementById("current-date").innerHTML = currentDate.toLocaleDateString('en-au', options);
+
+console.log(currentDate.toLocaleDateString('en-au', options));
+
+const clearInputsOfCreateTaskForm = () => {
+    document.getElementById("InputTitle").value = "";
+    document.getElementById("InputName").selectedIndex = 0;
+    document.getElementById("InputDesc").value = "";        
+    document.getElementById("InputDate").value = "";
+    document.getElementById("InputStatus").selectedIndex = 0;       
+}
+
+const showError = (elementId) => {
+    const referredElement = document.getElementById(elementId);
+    const referredErrorSpan = document.querySelector(`#${elementId} + span.error`);
+
+    switch (elementId) {
+        case "InputTitle":
+            {
+                if (referredElement.validity.valueMissing) {
+                    // If the field is empty, display the following error message.
+                    referredErrorSpan.textContent = `please input a title, minimum ${referredElement.minLength} characters`;
+                } else if ((referredElement.validity.tooShort) || (referredElement.value.length < 9)) {
+                    // If the data is too short, display the following error message.
+                    console.log(referredErrorSpan.textContent);
+                    console.log(referredElement.minLength);
+                    console.log(referredElement.value.length);
+                    referredErrorSpan.textContent = `Title should be at least ${referredElement.minLength} characters; you entered ${referredElement.value.length}`;
+                } 
+
+                // Set the styling appropriately
+                referredErrorSpan.className = "error active";
+            }
+            break;
+        case "InputName":
+            {
+                if (referredElement.value === "0") {
+                    // If an assignee was not selected, display the following error message.
+                    referredErrorSpan.textContent = "please choose one assignee from the dropdown list";
+                }
+
+                // Set the styling appropriately
+                referredErrorSpan.className = "error active";
+            }
+            break;
+        case "InputDesc":
+            {
+                if (referredElement.validity.valueMissing) {
+                    // If the field is empty, display the following error message.
+                    referredErrorSpan.textContent = `please input description, minimum ${referredElement.minLength} characters`;
+                } else if ((referredElement.validity.tooShort) || (referredElement.value.length < 16)) {
+                    // If the data is too short, display the following error message.
+                    referredErrorSpan.textContent = `Title should be at least ${referredElement.minLength} characters; you entered ${referredElement.value.length}`;
+                }
+
+                // Set the styling appropriately
+                referredErrorSpan.className = "error active";                
+            }
+            break;
+        case "InputDate":
+            {
+                const dateOfToday = new Date();
+
+                if ((referredElement.value === "") || (referredElement.valueAsNumber < dateOfToday.getTime())) {
+                    // If the set date is less than today.
+                    referredErrorSpan.textContent = `please choose a date not less than ${dateOfToday.toISOString().split('T')[0]}`;
+                }
+
+                // Set the styling appropriately
+                referredErrorSpan.className = "error active";                
+            }
+            break;
+        case "InputStatus":
+            {
+                if (referredElement.value === "0") {
+                    // If an assignee was not selected, display the following error message.
+                    referredErrorSpan.textContent = "please choose one status from the dropdown list";
+                }
+
+                // Set the styling appropriately
+                referredErrorSpan.className = "error active";
+            }
+            break;
+        default:
+            break;
+    }   
+};
+
+const setEventListener = (elementId, nameOfEvent) => {
+    const referredElement = document.getElementById(elementId);
+    const referredErrorSpan = document.querySelector(`#${elementId} + span.error`);
+
+    referredElement.addEventListener(nameOfEvent, (event) => {
+        // Each time the user types something, we check if the form fields are valid.
+        if (referredElement.validity.valid) {
+            // In case there is an error message visible, if the field is valid, we remove the error message.
+            referredErrorSpan.textContent = ""; // Reset the content of the message
+            referredErrorSpan.className = "error"; // Reset the visual state of the message
+        } else {
+            // If there is still an error, show the correct error
+            showError(elementId);
+        }   
+    });
+}
 
 const showCreateTaskForm = () => {
     document.getElementById("create-task").style.display = 'block';
     console.log('Creating task.');
     const td = new Date();
     // set minimum date as today
-    document.getElementById("InputDate").setAttribute('min', td.toISOString().split('T')[0]);        
+    document.getElementById("InputDate").setAttribute('min', td.toISOString().split('T')[0]);
+    
+    // set event listener to 'input' event for all input fileds
+    setEventListener("InputTitle", 'input');
+    setEventListener("InputName", "input");
+    setEventListener("InputDesc", "input");
+    setEventListener("InputDate", "input");
+    setEventListener("InputStatus", "input");
 }
 
-const resetCreateTaskForm = () => {
+const resetCreateTaskForm = (e) => {
     document.getElementById("create-task").style.display = 'block';
+    clearInputsOfCreateTaskForm();
+    e.preventDefault();
     console.log('Resetting create task.');
 }
 
-const clearInputsOfCreateTaskForm = () => {
-    document.getElementById("InputTitle").value = "";
-    document.getElementById("InputName").value = "";
-    document.getElementById("InputDesc").value = "";        
-    document.getElementById("InputDate").value = "";
-    document.getElementById("InputStatus").value = "";        
-}
 const closeCreateTaskForm = () => {
     document.getElementById("create-task").style.display = 'none';
     console.log('Closing task.');
@@ -53,74 +156,142 @@ function validateTaskForm(event) {
     const inputDate = document.getElementById("InputDate");
     const inputStatus = document.getElementById("InputStatus");
     const userInput = {};
+    let thereIsError = false;
 
-    event.preventDefault();
-
-    if (inputTitle.checkValidity()) {
-        inputTitle.setCustomValidity("");
+    if ((inputTitle.validity.valid) && (inputTitle.value.length > 8)) {
         userInput.Title = inputTitle.value;
+        inputTitle.classList.add('valid');
+        console.log("Title valid");
     } else {
-        inputTitle.setCustomValidity("minimum 9 characters, please");
+        console.log("Title invalid!");
+        // display an appropriate error message
+        showError("InputTitle");
+        // prevent the form from being sent by canceling the event
+        event.preventDefault();
+        thereIsError = true;
     }
 
-    if (inputName.checkValidity()) {
-        inputName.setCustomValidity("");
+    if ((inputName.value !== "0")  && (inputName.options[inputName.selectedIndex].text.length > 8)){
         userInput.AssignedTo = inputName.options[inputName.selectedIndex].text;
+        userInput.selectedIndexOfAssignee = inputName.selectedIndex > 0? inputName.selectedIndex - 1 : 0; 
+        inputName.classList.add("valid");
+        console.log("Assignee valid");
     } else {
-        inputName.setCustomValidity("minmum 9 characters, please");
+        console.log("Assignee invalid!");
+        // display an appropriate error message
+        showError("InputName");
+        // prevent the form from being sent by canceling the event
+        event.preventDefault();
+        thereIsError = true;
     }
 
-    if (inputDesc.checkValidity()) {
-        inputDesc.setCustomValidity("");
+    if ((inputDesc.validity.valid) && (inputDesc.value.length > 15)) {
         userInput.Description = inputDesc.value;
+        inputDesc.classList.add("valid");
+        console.log("Description valid");
     } else {
-        inputDesc.setCustomValidity("minimum 15 characters, please");
+        console.log("Description invalid!");
+        // display an appropriate error message
+        showError("InputDesc");
+        // prevent the form from being sent by canceling the event
+        event.preventDefault();
+        thereIsError = true;
     }
 
-    if (inputDate.checkValidity()) {
-        inputDate.setCustomValidity("");
+    if (inputDate.validity.valid) {
         userInput.dueDate = inputDate.value;
+        inputDate.classList.add("valid");
+        console.log("Due date valid");
     } else {
-        inputDate.setCustomValidity("date must be today or future days, please");
+        console.log("Due date invalid!");
+        // display an appropriate error message
+        showError("InputDate");
+        // prevent the form from being sent by canceling the event
+        event.preventDefault();
+        thereIsError = true;
     }
 
-    if (inputStatus.checkValidity()) {
-        inputStatus.setCustomValidity("");
+    if (inputStatus.value !== "0") {
         userInput.Status = inputStatus.options[inputStatus.selectedIndex].text;
+        userInput.selectedIndexOfStatus = inputStatus.selectedIndex > 0? inputStatus.selectedIndex - 1 : 0;
+        inputStatus.classList.add("valid");
+        console.log("Status valid");
     } else {
-        inputStatus.setCustomValidity("choose a status, please");
+        console.log("Status invalid!");
+        // display an appropriate error message
+        showError("InputStatus");
+        // prevent the form from being sent by canceling the event
+        event.preventDefault();
+        thereIsError = true;
     }
 
+    if (thereIsError === true) {
+        return;
+    }
+
+    console.log("To create a task ...\n");
     createATask(userInput);
     clearInputsOfCreateTaskForm();
 }
 
+function onCardStatusChange(event) {
+    event.preventDefault();
+    const cardHeaderBackgrounds = {
+        "To Do": "bg-info",
+        "In Progress": "bg-warning",
+        "In Review": "bg-primary",
+        "Done": "bg-success"
+    };
+    const taskStatusId = event.target.id; // e.g. friday05
+    // grap the number only from, e.g. friday05
+    const taskId = taskStatusId.substring(6);
+    const taskStatusValue = event.target.options[event.target.selectedIndex].text;
+    const targetCard = document.getElementById(`card-header${taskId}`);
+    targetCard.classList.remove("bg-info");
+    targetCard.classList.remove("bg-warning");
+    targetCard.classList.remove("bg-primary");
+    targetCard.classList.remove("bg-success");
+    targetCard.classList.add(cardHeaderBackgrounds[taskStatusValue]);
+
+    const taskValues = {
+        taskKey: taskStatusId,
+        Status: taskStatusValue,
+        indexOfStatus: event.target.selectedIndex
+    };
+
+    myTaskManager.updateTaskStatus(taskValues);
+} 
+
 const createATask = (userInput) => {
-    const taskObj = createATaskObj();
+    const taskObj = createATaskObj(myTaskManager.currentID);
     taskObj.Title = userInput.Title;
     taskObj.Description = userInput.Description;
     const [yearValue, monthValue, dayValue] = userInput.dueDate.split('-');
     taskObj.DueDate ={day: dayValue, month: monthValue, year: yearValue};
     taskObj.AssignedTo = userInput.AssignedTo;
     taskObj.Status = userInput.Status;
+    taskObj.indexOfAssignee = userInput.selectedIndexOfAssignee;
+    taskObj.indexOfStatus = userInput.selectedIndexOfStatus;
 
     const taskHTML = myTaskManager.addTaskHTML(taskObj);
     myTaskManager.addTask(taskObj);
     myTaskManager.renderTask(taskHTML);
 }
 
-const createATaskObj = () => {
+const createATaskObj = (id) => {
     return {
-        ID: 0,
+        ID: id,
         Title: "",
         Description: "",
         AssignedTo: "",
+        indexOfAssignee: 0,
         DueDate: {
             day: 0,
             month: 0,
             year: 0
         },
         Status: "",
+        indexOfStatus: 0,
         cardHeaderBackgrounds: {
             "To Do": "bg-info",
             "In Progress": "bg-warning",
@@ -135,6 +306,10 @@ class TaskManager {
         this._user = user;
         this._tasks = [];
         this._currentID = 0;
+    }
+
+    get currentID () {
+        return this._currentID;
     }
 
     get getAllTasks () {
@@ -165,9 +340,25 @@ class TaskManager {
     }
 
     addTaskHTML(task) {
+        // these ideally should be inline with those in Create Task Form in a global scope
+        const assignees = ["Jerry Lin", "Samantha Bijok", "Daniel Dang"];
+        const taskStatus = ["To Do", "In Progress", "In Review", "Done"];
+
+        let assigneeHTML = "";
+        for (let index = 0; index < assignees.length; index++) {
+            assigneeHTML += `<option value="${index + 1}" ${task.indexOfAssignee === index ? "selected": ""}><small>${assignees[index]}</small></option>\n`;
+        }
+        assigneeHTML += '\n';
+
+        let statusHTML = "";
+        for (let index = 0; index < taskStatus.length; index++) {
+            statusHTML += `<option value="${index + 1}" ${task.indexOfStatus === index ? "selected": ""}><small>${taskStatus[index]}</small></option>\n`;
+        }
+        statusHTML += '\n';
+
         const itemHTML = `<div id="${task.ID}" class="col mb-4">
                             <div class="card text-start shadow border-2">
-                                <div class="card-header ${task.cardHeaderBackgrounds[task.Status]}"></div>
+                                <div id="card-header${task.ID}" class="card-header ${task.cardHeaderBackgrounds[task.Status]}"></div>
                                 <!-- <img src="..." class="card-img-top" alt="..."> -->
                                 <div class="card-body">
                                     <h5 class="card-title">${task.Title}</h5>
@@ -184,20 +375,15 @@ class TaskManager {
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
                                                 <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                    <option value="1" selected><small>${task.AssignedTo}</small></option>
-                                                    <option value="2"><small>Samantha</small></option>
-                                                    <option value="3"><small>Daniel</small></option>
+                                                    ${assigneeHTML}
                                                 </select>  
                                             </div>
                                         </li>
                                         <li class="list-group-item p-0">
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
-                                                <select class="custom-select custom-select-sm my-1 border-0 text-muted">
-                                                    <option value="1" selected><small>${task.Status}</small></option>
-                                                    <option value="2"><small>To Do</small></option>
-                                                    <option value="3"><small>In Review</small></option>
-                                                    <option value="4"><small>Done</small></option>
+                                                <select id="friday${task.ID}" onchange="onCardStatusChange(event)" class="custom-select custom-select-sm my-1 border-0 text-muted">
+                                                    ${statusHTML}
                                                 </select>  
                                             </div>
                                         </li>
@@ -208,6 +394,15 @@ class TaskManager {
                         </div>`;
     
         return itemHTML;
+    }
+
+    updateTaskStatus (taskValues) {
+        const storedItem = localStorage.getItem(taskValues.taskKey);
+        const taskObj = JSON.parse(storedItem);
+        taskObj.Status = taskValues.Status;
+        taskObj.indexOfStatus = taskValues.indexOfStatus;
+        const taskStr = JSON.stringify(taskObj);
+        localStorage.setItem(taskValues.taskKey, taskStr);
     }
 
     loadStoredTasks() {
@@ -256,32 +451,8 @@ const idArray = allTasks.map(task => task.ID);
 if (idArray.length > 0) {
     const maxId = Math.max(...idArray);
     console.log(`max ID used last time: ${maxId}`);
-    myTaskManager.initiateCurrentId(maxId);
+    myTaskManager.initiateCurrentId(maxId + 1);
 }
 
 myTaskManager.addAllTaskItemsFromLocalStorage(allTasks);
-
-// ----------- this following code snippet is just for verifying the functions of class TaskManger
-// and the addTaskItem function. Next, tasks will be created and added into the Task List and the Task Board
-// by the user
-// const newTask = createATaskObj();
-// newTask.Title = "Add current date in banner";
-// newTask.Description = "In the Banner, between the heading and the Create Task buttion, add a display of the current date in a user friendly form.";
-// newTask.DueDate ={day: 24, month: 11, year: 2022};
-// newTask.AssignedTo = "Samantha";
-// newTask.Status = "In Progress";
-// console.log(newTask);
-
-// myTaskManager.addTask(newTask);
-// console.log("all tasks:\n");
-// console.log(myTaskManager.getAllTasks);
-// console.log(myTaskManager.getTasksWithStatus("In Progress"));
-
-// addTaskHTML(newTask);
-
-// myTaskManager.loadStoredTasks();
-// console.log("load again All tasks: \n")
-// console.log(myTaskManager.getAllTasks);
-// ------------ END of verifying code
-
 
