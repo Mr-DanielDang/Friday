@@ -170,9 +170,6 @@ function validateTaskForm(event) {
         event.preventDefault();
         thereIsError = true;
     }
-    // Could an "if ... else" statement work?
-    // document.getElementById("titleError").innerHTML = titleText1;
-    document.getElementById("titleError").innerHTML = titleText2;
 
     if ((inputName.value !== "0")  && (inputName.options[inputName.selectedIndex].text.length > 8)){
         userInput.AssignedTo = inputName.options[inputName.selectedIndex].text;
@@ -187,7 +184,6 @@ function validateTaskForm(event) {
         event.preventDefault();
         thereIsError = true;
     }
-    document.getElementById("assignError").innerHTML = assignText1;
 
     if ((inputDesc.validity.valid) && (inputDesc.value.length > 15)) {
         userInput.Description = inputDesc.value;
@@ -201,8 +197,6 @@ function validateTaskForm(event) {
         event.preventDefault();
         thereIsError = true;
     }
-    // document.getElementById("descError").innerHTML = descText1;
-    document.getElementById("descError").innerHTML = descText2;
 
     if (inputDate.validity.valid) {
         userInput.dueDate = inputDate.value;
@@ -216,8 +210,6 @@ function validateTaskForm(event) {
         event.preventDefault();
         thereIsError = true;
     }
-    // document.getElementById("dateError").innerHTML = dateText1;
-    document.getElementById("dateError").innerHTML = dateText2;
 
     if (inputStatus.value !== "0") {
         userInput.Status = inputStatus.options[inputStatus.selectedIndex].text;

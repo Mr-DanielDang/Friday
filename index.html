@@ -42,12 +42,12 @@
 
                 <form id="create-task-form" novalidate>
                     <!-- Trying to change the colour of the borders -->
-                    <div class="container-md border border-3 div-borderColor div-taskInputColor" style="padding: 5px;">
+                    <div class="container-md div-taskBorderColor div-taskInputColor" style="padding: 5px;">
                         <label for="InputTitle">Title</label>
                         <input type="text" class="form-control div-taskInputAreaColor" id="InputTitle" aria-describedby="titleHelp" minlength="9" maxlength="60" required>
                         <span class="error" aria-live="polite"></span>
                     </div>
-                    <div class="container-md border border-3 border-top-0 div-borderColor div-taskInputColor" style="padding: 5px;">
+                    <div class="container-md border-top-0 div-taskBorderColor div-taskInputColor" style="padding: 5px;">
                         <label for="InputName" class="col-auto">Assigned To:</label>
                         <div class="col-auto">
                             <select class="form-control div-taskInputAreaColor" id="InputName" aria-describedby="nameHelp" aria-placeholder="select a group member" required>
@@ -59,17 +59,17 @@
                             <span class="error" aria-live="polite"></span>
                         </div>
                     </div>
-                    <div class="container-md border border-3 border-top-0 div-borderColor div-taskInputColor" style="padding: 5px;">
+                    <div class="container-md border-top-0 div-taskBorderColor div-taskInputColor" style="padding: 5px;">
                         <label for="InputDesc">Description</label>
                         <textarea class="form-control div-taskInputAreaColor" id="InputDesc" style="height: 120px;" minlength="16" maxlength="150" required></textarea>
                         <span class="error" aria-live="polite"></span>
                     </div>
-                    <div class="container-md border border-3 border-top-0 div-borderColor div-taskInputColor" style="padding: 5px;">
+                    <div class="container-md border-top-0 div-taskBorderColor div-taskInputColor" style="padding: 5px;">
                         <label for="InputDate">Due Date:</label>
                         <input type="date" id="InputDate" class="form-control div-taskInputAreaColor" required>
                         <span class="error" aria-live="polite"></span>
                     </div>
-                    <div class="container-md border border-3 border-top-0 div-borderColor div-taskInputColor" style="padding: 5px;">
+                    <div class="container-md border-top-0 div-taskBorderColor div-taskInputColor" style="padding: 5px;">
                         <label for="InputStatus">Status</label>
                         <select class="form-control div-taskInputAreaColor" id="InputStatus" aria-describedby="statusHelp" required>
                             <option value="0">--select status--</option>

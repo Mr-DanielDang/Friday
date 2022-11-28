@@ -137,6 +137,8 @@ header {
     height: auto;
     z-index: 200;
     font-size: 1rem;
+    min-width: 450px;
+    max-width: 500px;
 }
 
 .div-taskInputColor {
@@ -145,6 +147,12 @@ header {
 
 .div-taskInputAreaColor {
     background-color: var(--background-color-input-area);
+}
+
+.div-taskBorderColor {
+    border-color: var(--background-color-header);
+    border-style: solid;
+    border-width: 3px;
 }
 
 /* .no-outline:focus {
