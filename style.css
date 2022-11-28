@@ -90,19 +90,22 @@ header {
     color: whitesmoke;
 }
 
-.banner-container h4 {
+.banner-container ul {
     font-size: 1rem;
-    /* font-family: Helvetica, sans-serif; */
     position: relative;
     left:auto;
+    font-weight: light;
+    top: 35%;
+    list-style: none;
+    display: inline-block;
+
 }
 
-.banner-container h4 span {
-    font-size: 1rem;
-    font-family: Helvetica, sans-serif;
+.banner-container li {
+    font-size: 1.25rem;
     position: relative;
-    /* background-color: #aebdd5; */
-    /* box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8); */
+    left:auto;
+    display: inline-block;
 }
 
 .banner-container button {
@@ -249,6 +252,8 @@ header {
 
 /* footer */
 footer ul {
+    display: flex;
+    justify-content: center;
     background-color: #a88957;
     padding: 10px 5px;
     margin-bottom: 0em;
@@ -259,4 +264,6 @@ footer li {
     list-style: none;
     color: black;
     font-size: smaller;
+    letter-spacing: 1px;
+    margin: 0 0.5rem;
 }
