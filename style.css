@@ -106,7 +106,6 @@ header {
     position: relative;
     left:auto;
     display: inline-block;
-    letter-spacing: .25rem;
 }
 
 .banner-container button {
@@ -251,6 +250,8 @@ header {
 
 /* footer */
 footer ul {
+    display: flex;
+    justify-content: center;
     background-color: #a88957;
     padding: 10px 5px;
     margin-bottom: 0em;
@@ -262,4 +263,5 @@ footer li {
     color: black;
     font-size: smaller;
     letter-spacing: 1px;
+    margin: 0 0.5rem;
 }
