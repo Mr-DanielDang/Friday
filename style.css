@@ -1,5 +1,4 @@
 /* reset */
-
 * {
     margin: 0;
     padding: 0;
@@ -12,6 +11,7 @@ html {
     text-align: center; 
 }
 
+/* color settings */
 :root {
     --backgrouond-color-body: #5776a8;
     --background-color-header: #a88957;
@@ -20,18 +20,13 @@ html {
     --background-color-taskboard-title: #a88957;
     --color-taskboard-title-border: #705b3a;
     --background-color-taskboard-body: #aebdd5;
-    --background-color-task-title: #fadaab;
-    --background-color-task-attribute: #91a5c6;
-    --background-color-task-value: #c3cee0;    
-    --color-task-border: #f39c1f;
-    --background-color-todo: #8994a5;
-    --background-color-inprogress: #f7df77;
-    --background-color-review: #77c4f7;
-    --background-color-done: #0bbe52;
-    --background-color-submit-button: #4065a1;
-    --background-color-reset-button: #8493ac;
+    --background-color-create-task-form: #F4D447;
+    --background-color-input-label: #f7df77;
+    --background-color-input-area: #faefbd;
+    --background-color-error-msg: #FF3333;
 }
 
+/* header */
 header {
     background-color: var(--background-color-header);
     height: 80px;
@@ -64,6 +59,7 @@ header {
     height: 50px;
 }
 
+/* banner */
 .banner-container {
     background-image: url("resources/images/image_banner.png");
     background-repeat: no-repeat;
@@ -129,44 +125,90 @@ header {
     transform: translate(-50%);
     border: 1px solid black;
     box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8);
-  }
-    
-.div-taskInputColor {
-    background-color: #f7df77;
 }
-
-.div-taskInputColor2 {
-    background-color: #faefbd;
-}
-
-.no-outline:focus {
-    outline: none;
-    border: none;
-}
-
-.row {
-    align-items: center;
-    justify-content: center;
-    padding-top: 12px;
-}
-
-.div-borderColor {
-    border-color: #705b3a;
-}  
-
+ 
+/* Create A Task form */
 .create-task {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);    
-    background-color: var(--background-color-inprogress);
-    padding: 1rem;
+    background-color: var(--background-color-create-task-form);
+    padding: 0.4rem;
+    border-radius: 0.3rem;
     width: 40%;
     height: auto;
     z-index: 200;
+    font-size: 1rem;
 }
 
+.div-taskInputColor {
+    background-color: var(--background-color-input-label);
+}
+
+.div-taskInputAreaColor {
+    background-color: var(--background-color-input-area);
+}
+
+/* .no-outline:focus {
+    outline: none;
+    border: none;
+} */
+
+#btns-create-task {
+    display: flex;   
+    justify-content: space-evenly;
+    padding: 5px 0.2rem 0 0.2rem;
+}
+
+#btns-create-task button {
+    width: 30%;
+}
+
+/* #create-task .div-borderColor {
+    border-color: #705b3a;
+}   */
+
+.form-control {
+    padding: 0 0.75rem;
+}
+
+/* This is our style for the invalid fields */
+.create-task input.invalid, .create-task select.invalid, .create-task textarea.invalid {
+    border-color: 1px solid #FF3333;
+}
+  
+.create-task  input:focus.invalid, .create-task select:focus.invalid, .create-task textarea:focus.invalid {
+    outline: none;
+}
+
+.create-task input.valid, .create-task select.valid, .create-task textarea.valid {
+    border-color:green;
+}
+
+.create-task  input:focus.valid, .create-task select:focus.valid, .create-task textarea:focus.valid {
+    outline: none;
+}
+
+  /* This is the style of our error messages */
+.create-task  .error {
+    width: 100%;
+    padding: 0;
+    font-size: 80%;
+    font-style: italic;
+    color: white;
+    background-color: var(--background-color-error-msg);
+    opacity: 0.9;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+  
+.create-task .error.active {
+    padding: 0.3em;
+}
+
+/* Task Board */
 .task-board {
     position: relative;
 }
@@ -204,10 +246,6 @@ header {
 .card textarea {
     border: none;
     padding: 0;
-}
-
-.delete-button {
-    list-style: none;
 }
 
 footer ul {
