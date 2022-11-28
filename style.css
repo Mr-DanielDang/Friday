@@ -215,6 +215,8 @@ header {
 /* Task Board */
 .task-board {
     position: relative;
+    height: 100vh;
+    background-color: var(--background-color-taskboard-body);
 }
 
 .board-name {
