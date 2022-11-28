@@ -206,6 +206,10 @@ header {
     padding: 0;
 }
 
+.delete-button {
+    list-style: none;
+}
+
 footer ul {
     background-color: #a88957;
     padding: 10px 5px;

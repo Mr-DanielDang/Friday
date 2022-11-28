@@ -201,7 +201,11 @@ class TaskManager {
                                                 </select>  
                                             </div>
                                         </li>
-                                        <button class="delete-button" type="button">Delete task</button>
+                                        <li class="list-group-item">
+                                            <div class="item-wrapper .text-right">
+                                        <button type="button" class="btn btn-outline-danger">Delete task</button> 
+                                            </div>       
+                                        </li>
                                     </ul>                                                                         
                                 </div>
                             </div>
