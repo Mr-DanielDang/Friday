@@ -302,6 +302,7 @@ const createATaskObj = (id) => {
         },
         Status: "",
         indexOfStatus: 0,
+        taskDisabled: false,
         cardHeaderBackgrounds: {
             "To Do": "bg-info",
             "In Progress": "bg-warning",
@@ -373,18 +374,18 @@ class TaskManager {
                                 <div class="card-body">
                                     <h5 class="card-title">${task.Title}</h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><small>Description</small></h6>
-                                    <p class="card-text"><textarea class="form-control" rows="3">${task.Description}</textarea></p>
+                                    <p class="card-text"><textarea class="form-control" rows="3" ${task.taskDisabled === true? "disalbed" : ""}>${task.Description}</textarea></p>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item p-0">
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-text text-muted"><small>Due Date</small></h6>
-                                                <input type="date" value="${task.DueDate.year}-${task.DueDate.month}-${task.DueDate.day}">
+                                                <input type="date" value="${task.DueDate.year}-${task.DueDate.month}-${task.DueDate.day}" ${task.taskDisabled === true? "disalbed" : ""}>
                                             </div>
                                         </li>
                                         <li class="list-group-item p-0">
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
-                                                <select class="custom-select custom-select-sm my-1 border-0 text-muted">
+                                                <select class="custom-select custom-select-sm my-1 border-0 text-muted" ${task.taskDisabled === true? "disalbed" : ""}>
                                                     ${assigneeHTML}
                                                 </select>  
                                             </div>
@@ -392,7 +393,7 @@ class TaskManager {
                                         <li class="list-group-item p-0">
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
-                                                <select id="friday${task.ID}" onchange="onCardStatusChange(event)" class="custom-select custom-select-sm my-1 border-0 text-muted">
+                                                <select id="friday${task.ID}" onchange="onCardStatusChange(event)" class="custom-select custom-select-sm my-1 border-0 text-muted" ${task.taskDisabled === true? "disalbed" : ""}>
                                                     ${statusHTML}
                                                 </select>  
                                             </div>
@@ -432,11 +433,25 @@ class TaskManager {
         localStorage.removeItem(`friday${taskId}`);
     }
 
+    disableEditingOfATask (taskId) {
+        const taskDescription = document.querySelector(`#${taskId} textarea`);
+        const taskDate = document.querySelector(`#${taskId} input[type="date"]`);
+        // the first select element is for assignees
+        const taskAssignedTo = document.querySelector(`#${taskId} select`);
+        const taskStatus = document.querySelector(`#${taskId} select[id="friday${taskId}"]`);
+
+        taskDescription.disabled = true;
+        taskDate.disabled = true;
+        taskAssignedTo.disabled = true;
+        taskStatus.disabled = true;
+    }
+
     updateTaskStatus (taskValues) {
         const storedItem = localStorage.getItem(taskValues.taskKey);
         const taskObj = JSON.parse(storedItem);
         taskObj.Status = taskValues.Status;
         taskObj.indexOfStatus = taskValues.indexOfStatus;
+        taskObj.taskDisabled = taskValues.taskDisabled;
         const taskStr = JSON.stringify(taskObj);
         localStorage.setItem(taskValues.taskKey, taskStr);
     }
