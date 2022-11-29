@@ -265,7 +265,7 @@ header {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: smaller;
+    font-size: xx-small;
     border-radius: 25px;
     position: absolute;
     top: 25%;
@@ -277,6 +277,14 @@ header {
     width: 50%
 }
 
+.delete-button:hover {
+    background-color: #FF3333 !important;
+    color: whitesmoke !important;
+    transition: 0.7s;
+    scale: 1.2;
+    margin: 0.5rem;   
+    opacity: 1;
+}
 
 /* footer */
 footer ul {
