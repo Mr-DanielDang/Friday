@@ -262,6 +262,16 @@ function onCardStatusChange(event) {
     myTaskManager.updateTaskStatus(taskValues);
 } 
 
+function onDeleteTask(event) {
+    event.preventDefault();
+    const deleteBtnId = event.target.id;
+    // grap the number only from. e.g. delete-btn-05
+    const taskId = deleteBtnId.substring(11);
+
+    myTaskManager.removeTask(taskId);
+    myTaskManager.removeTaskHtml(taskId);
+}
+
 const createATask = (userInput) => {
     const taskObj = createATaskObj(myTaskManager.currentID);
     taskObj.Title = userInput.Title;
@@ -399,6 +409,32 @@ class TaskManager {
         return itemHTML;
     }
 
+    removeTaskHtml(taskId) {
+        const taskElement = document.getElementById(`${taskId}`);
+        if (taskElement === null) {
+            console.log("task element is not found in DOM! exit");
+            return;
+        }
+
+        if (taskElement.parentNode) {
+            taskElement.parentNode.removeChild(taskElement);
+        } else {
+            console.log("something wrong, a task element must have its parent!");
+        }
+    }
+
+    removeTask(taskId) {
+        const indexOfTask = this._tasks.findIndex((nextTask) => nextTask.ID === Number(taskId));
+        if (indexOfTask === -1) {
+            console.log(`can't find a task object with id: ${taskId} ! exit`);
+            return;
+        }
+
+        console.log(`removing task object with id: friday${taskId} at index ${indexOfTask} ...`);
+        this._tasks.splice(indexOfTask, 1);
+        localStorage.removeItem(`friday${taskId}`);
+    }
+
     updateTaskStatus (taskValues) {
         const storedItem = localStorage.getItem(taskValues.taskKey);
         const taskObj = JSON.parse(storedItem);
@@ -433,10 +469,6 @@ class TaskManager {
             const tHTML = this.addTaskHTML(task);
             this.renderTask(tHTML);
         });
-    }
-
-    removeTask (taskID) {
-
     }
 
     initiateCurrentId (id) {
