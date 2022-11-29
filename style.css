@@ -73,7 +73,6 @@ header {
 
 .banner-container h2 {
     font-size: 2rem;
-    font-family: Helvetica, sans-serif; 
     text-align: center;
     background-color: var(--background-color-header);
     padding: 1rem;
@@ -114,7 +113,6 @@ header {
     color: black;
     padding: 10px 20px;
     text-align: center;
-    text-decoration: none;
     display: inline-block;
     font-size: 1.5rem;
     border-radius: 25px;
@@ -258,32 +256,17 @@ header {
 }
 
 .delete-button { 
-    font-family: Helvetica, sans-serif;
-    background-color: var(--background-color-banner);
-    color: black;
-    padding: 1px 2px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
+    padding: 1px 3px;
     font-size: xx-small;
-    border-radius: 25px;
-    position: absolute;
-    top: 25%;
-    left: 75%;
-    right: -50%;
-    transform: translate(-50%);
-    border: 1px solid black;
     box-shadow: 2px 2px 5px 1px rgb(0 0 0 / 50%);
-    width: 50%
 }
 
 .delete-button:hover {
     background-color: #FF3333 !important;
     color: whitesmoke !important;
-    transition: 0.7s;
+    transition: 0.2s;
     scale: 1.2;
-    margin: 0.5rem;   
-    opacity: 1;
+    margin: 0.5rem;
 }
 
 /* footer */
