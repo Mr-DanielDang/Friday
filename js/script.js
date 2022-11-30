@@ -236,7 +236,7 @@ function validateTaskForm(event) {
     clearInputsOfCreateTaskForm();
 }
 
-function onCardStatusChange(event) {
+window.onCardStatusChange = function (event) {
     event.preventDefault();
     const cardHeaderBackgrounds = {
         "To Do": "bg-info",
@@ -264,7 +264,7 @@ function onCardStatusChange(event) {
     myTaskManager.updateTaskStatus(taskValues);
 } 
 
-function onMarkAsDone(event) {
+window.onMarkAsDone = function (event) {
     event.preventDefault();
     const cardHeaderBackgrounds = {
         "To Do": "bg-info",
@@ -303,7 +303,7 @@ function onMarkAsDone(event) {
     parentNode.replaceChild(doneBtn, markAsDoneBtn);
 }
 
-function onDeleteTask(event) {
+window.onDeleteTask = function (event) {
     event.preventDefault();
     const deleteBtnId = event.target.id;
     // grap the number only from. e.g. delete-btn-05
