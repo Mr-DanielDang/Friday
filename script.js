@@ -262,6 +262,45 @@ function onCardStatusChange(event) {
     myTaskManager.updateTaskStatus(taskValues);
 } 
 
+function onMarkAsDone(event) {
+    event.preventDefault();
+    const cardHeaderBackgrounds = {
+        "To Do": "bg-info",
+        "In Progress": "bg-warning",
+        "In Review": "bg-primary",
+        "Done": "bg-success"
+    };
+    const taskMarkId = event.target.id;
+    const taskId = taskMarkId.substring(11);
+    const taskStatus = document.getElementById(`friday${taskId}`);
+    taskStatus.selectedIndex = 3;
+
+    const taskStatusValue = taskStatus.options[taskStatus.selectedIndex].text;
+    const targetCard = document.getElementById(`card-header${taskId}`);
+    targetCard.classList.remove("bg-info");
+    targetCard.classList.remove("bg-warning");
+    targetCard.classList.remove("bg-primary");
+    targetCard.classList.remove("bg-success");
+    targetCard.classList.add(cardHeaderBackgrounds[taskStatusValue]);
+
+    const taskValues = {
+        taskKey: `friday${taskId}`,
+        Status: taskStatusValue,
+        indexOfStatus: taskStatus.selectedIndex,
+        markAsDone: true
+    };
+
+    myTaskManager.updateTaskStatus(taskValues);
+    const markAsDoneBtn = document.getElementById(taskMarkId);
+    const parentNode = markAsDoneBtn.parentNode;
+    const doneBtn = document.createElement(`button`);
+    doneBtn.setAttribute("class", "markTask-button");
+    doneBtn.setAttribute("type", "button");
+    doneBtn.setAttribute("disabled", "");
+    doneBtn.innerText = "Done";
+    parentNode.replaceChild(doneBtn, markAsDoneBtn);
+}
+
 function onDeleteTask(event) {
     event.preventDefault();
     const deleteBtnId = event.target.id;
@@ -302,6 +341,7 @@ const createATaskObj = (id) => {
         },
         Status: "",
         indexOfStatus: 0,
+        markAsDone: false,
         taskDisabled: false,
         cardHeaderBackgrounds: {
             "To Do": "bg-info",
@@ -398,10 +438,12 @@ class TaskManager {
                                                 </select>  
                                             </div>
                                         </li>
-                                        <li class="list-group-item pe-0"> 
-                                        <button type="button" class="delete-button text-danger float-end btn btn-sm rounded bg-white border-1 border-secondary" style="--bs-btn-padding-y: 0.1rem;">Delete Task</button>
-                                        </li>
-                                        
+                                        <li class="list-group-item pe-0">
+                                            
+                                            <button id="friday-mark${task.ID}" onclick="onMarkAsDone(event)" class="markTask-button" type="button" ${task.markAsDone == true ? "disabled" : ""}>${task.markAsDone == true ? "Done" : "Mark as done"}</button>
+                                            <button type="button" class="delete-button text-danger float-end btn btn-sm rounded bg-white border-1 border-secondary" style="--bs-btn-padding-y: 0.1rem;">Delete Task</button>
+                                            
+                                        </li>                                        
                                     </ul>                                                                         
                                 </div>
                             </div>
@@ -455,6 +497,7 @@ class TaskManager {
         taskObj.Status = taskValues.Status;
         taskObj.indexOfStatus = taskValues.indexOfStatus;
         taskObj.taskDisabled = taskValues.taskDisabled;
+        taskObj.markAsDone = taskValues.markAsDone;
         const taskStr = JSON.stringify(taskObj);
         localStorage.setItem(taskValues.taskKey, taskStr);
     }
