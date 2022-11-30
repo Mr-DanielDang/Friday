@@ -295,6 +295,7 @@ function onMarkAsDone(event) {
     const parentNode = markAsDoneBtn.parentNode;
     const doneBtn = document.createElement(`button`);
     doneBtn.setAttribute("class", "markTask-button");
+    doneBtn.setAttribute("class", "taskDone-button");
     doneBtn.setAttribute("type", "button");
     doneBtn.setAttribute("disabled", "");
     doneBtn.innerText = "Done";
@@ -439,7 +440,7 @@ class TaskManager {
                                             </div>
                                         </li>
                                         <li class="list-group-item pe-0">
-                                            <button id="friday-mark${task.ID}" onclick="onMarkAsDone(event)" class="markTask-button" type="button" ${task.markAsDone == true ? "disabled" : ""}>${task.markAsDone == true ? "Done" : "Mark as done"}</button>
+                                            <button id="friday-mark${task.ID}" onclick="onMarkAsDone(event)" class="markTask-button taskDone-button" type="button" ${task.markAsDone == true ? "disabled" : ""}>${task.markAsDone == true ? "Done" : "Mark as done"}</button>
                                             <button id="delete-btn-${task.ID}" onclick="onDeleteTask(event)" type="button" class="delete-button text-danger float-end btn btn-sm rounded bg-white border-1 border-secondary" style="--bs-btn-padding-y: 0.1rem;">Delete Task</button>
                                         </li>                                        
                                     </ul>                                                                         

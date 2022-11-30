@@ -269,6 +269,37 @@ header {
     margin: 0.5rem;
 }
 
+/* mark task button */
+.markTask-button {
+    padding: 1px 3px;
+    font-size: xx-small;
+    box-shadow: 2px 2px 5px 1px rgb(0 0 0 / 50%);
+    border-radius: 6px;
+    border-color: grey;
+    border-style: solid;
+    border-width: 1.25px;
+    background-color: white;
+    transform: translate(-2em, -0.6em);
+}
+
+.markTask-button:hover {
+    background-color: grey;
+    color: whitesmoke;
+    transition: 0.2s;
+    scale: 1.2;
+    transform: translate(-1.7em, 0.2em);
+    margin: 0.5rem;
+}
+
+/* task done */
+.taskDone-button {
+    pointer-events: none;
+    background-color: green;
+    color: whitesmoke;
+    border-color: green;
+    font-weight: bold;
+}
+
 /* footer */
 footer ul {
     display: flex;
