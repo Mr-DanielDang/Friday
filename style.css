@@ -68,7 +68,7 @@ header {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
-    height: 26rem;
+    height: 23rem;
     top: 80px;
     position: relative;
     opacity: 0.9;
@@ -78,7 +78,7 @@ header {
     font-size: 2rem;
     text-align: center;
     background-color: var(--background-color-header);
-    padding: 1rem;
+    padding: 0.5rem;
     color: black;
     position: absolute;
     top: 10%;
@@ -114,7 +114,7 @@ header {
     font-family: Helvetica, sans-serif;
     background-color: var(--background-color-banner);
     color: black;
-    padding: 10px 20px;
+    padding: 0.5rem 1rem;
     text-align: center;
     display: inline-block;
     font-size: 1.5rem;
@@ -127,6 +127,11 @@ header {
     box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8);
 }
 
+.banner-container button:hover {
+    background-color: var(--background-color-create-task-btn-onhover) !important;
+    color: var(--color-create-task-btn-onhover) !important;
+}
+ 
 /* Create A Task form */
 .create-task {
     position: fixed;
@@ -217,7 +222,7 @@ header {
 .board-name {
     background-color: var(--background-color-taskboard-title);
     margin-bottom: 0;
-    padding: 1rem;  /* reboot.scss set 0.5rem to margin-bottom for headings */
+    padding: 0.5rem;
     border-bottom: 0.1rem solid var(--color-taskboard-title-border);
 }
 
