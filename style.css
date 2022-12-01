@@ -24,6 +24,9 @@ html {
     --background-color-input-label: #f7df77;
     --background-color-input-area: #faefbd;
     --background-color-error-msg: #FF3333;
+    --background-color-create-task-btn-onhover: #AED5B3;
+    --color-create-task-btn-onhover: black;
+    --background-color-done-btn: #198754;
 }
 
 /* header */
@@ -123,7 +126,7 @@ header {
     border: 1px solid black;
     box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8);
 }
- 
+
 /* Create A Task form */
 .create-task {
     position: fixed;
@@ -156,11 +159,6 @@ header {
     border-width: 3px;
 }
 
-/* .no-outline:focus {
-    outline: none;
-    border: none;
-} */
-
 #btns-create-task {
     display: flex;   
     justify-content: space-evenly;
@@ -170,10 +168,6 @@ header {
 #btns-create-task button {
     width: 30%;
 }
-
-/* #create-task .div-borderColor {
-    border-color: #705b3a;
-}   */
 
 .form-control {
     padding: 0 0.75rem;
@@ -257,50 +251,54 @@ header {
 
 .delete-button { 
     padding: 1px 3px;
-    font-size: xx-small;
-    box-shadow: 2px 2px 5px 1px rgb(0 0 0 / 50%);
+    font-size: 0.6rem;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
 }
 
 .delete-button:hover {
     background-color: #FF3333 !important;
     color: whitesmoke !important;
-    transition: 0.2s;
+    transition: all 0.2s ease-in-out;
     scale: 1.2;
-    margin: 0.5rem;
+    margin: 0.2rem;
 }
 
 /* mark task button */
 .markTask-button {
     padding: 1px 3px;
-    font-size: xx-small;
-    box-shadow: 2px 2px 5px 1px rgb(0 0 0 / 50%);
+    font-size: 0.6rem;
+    box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.5);
     border-radius: 6px;
     border-color: grey;
     border-style: solid;
-    border-width: 1.25px;
+    border-width: 1px;
     background-color: white;
-    transform: translate(4em, -0.6em);
+    transform: translate(2rem, -0.3rem);
 }
 
 .markTask-button:hover {
     background-color: grey;
     color: whitesmoke;
-    transition: all 0.2s;
+    transition: all 0.2s ease-in-out;
     scale: 1.2;
+    margin: 0.2rem;
 }
 
 /* task done */
 .taskDone-button {
     pointer-events: none;
-    background-color: green;
+    background-color: var(--background-color-done-btn);
     color: whitesmoke;
-    border-color: green;
+    border-color: var(--background-color-done-btn);
     font-weight: bold;
     border-radius: 6px;
     border-width: 1px;
     border-style: solid;
-    font-size: small;
-    width: 4rem;
+    font-size: 0.6rem;
+    width: 3.5rem;
+    padding: 1px;
+    transform: translate(0, -0.3rem);
 }
 
 /* footer */

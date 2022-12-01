@@ -84,9 +84,9 @@ class TaskManager {
                                                 </select>  
                                             </div>
                                         </li>
-                                        <li class="list-group-item pe-0">
+                                        <li class="list-group-item ps-0 pe-0">
                                             <button id="friday-mark${task.ID}" onclick="onMarkAsDone(event)" class=${task.markAsDone == true ? "taskDone-button" : "markTask-button"} ${task.markAsDone == true ? "disabled" : ""}>${task.markAsDone == true ? "Done" : "Mark as done"}</button>
-                                            <button id="delete-btn-${task.ID}" onclick="onDeleteTask(event)" type="button" class="delete-button text-danger float-end btn btn-sm rounded bg-white border-1 border-secondary" style="--bs-btn-padding-y: 0.1rem;">Delete Task</button>
+                                            <button id="delete-btn-${task.ID}" onclick="onDeleteTask(event)" type="button" class="delete-button text-danger float-end btn rounded bg-white border-1 border-secondary" style="--bs-btn-padding-y: 0.2rem;">Delete Task</button>
                                         </li>                                        
                                     </ul>                                                                         
                                 </div>
