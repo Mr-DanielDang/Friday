@@ -13,6 +13,7 @@ html {
 
 /* color settings */
 :root {
+    --color-text-default: #232323;
     --backgrouond-color-body: #5776a8;
     --background-color-header: #a88957;
     --background-color-banner: #a88957;
@@ -20,9 +21,11 @@ html {
     --background-color-taskboard-title: #a88957;
     --color-taskboard-title-border: #705b3a;
     --background-color-taskboard-body: #aebdd5;
-    --background-color-create-task-form: #F4D447;
-    --background-color-input-label: #f7df77;
-    --background-color-input-area: #faefbd;
+    --background-color-create-task-form: #C4AE8C;
+    --background-color-input-border: #C4AE8C;
+    --background-color-input-label: #BDD5AE;
+    --background-color-input-area: #e3e8f1;
+    --color-create-task-form: #4B4B4B;
     --background-color-error-msg: #FF3333;
     --background-color-create-task-btn-onhover: #AED5B3;
     --color-create-task-btn-onhover: black;
@@ -31,6 +34,7 @@ html {
 
 /* header */
 header {
+    color: var(--color-text-default);
     background-color: var(--background-color-header);
     height: 80px;
     width: 100%;
@@ -71,21 +75,21 @@ header {
     height: 23rem;
     top: 80px;
     position: relative;
-    opacity: 0.9;
 }
 
 .banner-container h2 {
     font-size: 2rem;
     text-align: center;
+    color: var(--color-text-default);
     background-color: var(--background-color-header);
     padding: 0.5rem;
-    color: black;
     position: absolute;
     top: 10%;
     left: 50%;
     transform: translate(-50%);    
     width: 100%;
     box-shadow: 5px 5px 10px 2px rgba(0,0,0,.8);
+    opacity: 0.9;
 }
 
 .banner-container h2 span {
@@ -95,12 +99,11 @@ header {
 .banner-container ul {
     font-size: 1rem;
     position: relative;
-    left:auto;
     font-weight: light;
     top: 35%;
     list-style: none;
     display: inline-block;
-
+    padding-left: 0;
 }
 
 .banner-container li {
@@ -113,7 +116,7 @@ header {
 .banner-container button {
     font-family: Helvetica, sans-serif;
     background-color: var(--background-color-banner);
-    color: black;
+    color: var(--color-text-default);
     padding: 0.5rem 1rem;
     text-align: center;
     display: inline-block;
@@ -148,20 +151,16 @@ header {
     font-size: 1rem;
     min-width: 450px;
     max-width: 500px;
+    color: var(--color-create-task-form);
 }
 
 .div-taskInputColor {
     background-color: var(--background-color-input-label);
+    border: var(--background-color-input-border) solid 3px;
 }
 
 .div-taskInputAreaColor {
     background-color: var(--background-color-input-area);
-}
-
-.div-taskBorderColor {
-    border-color: var(--background-color-header);
-    border-style: solid;
-    border-width: 3px;
 }
 
 #btns-create-task {
@@ -176,6 +175,7 @@ header {
 
 .form-control {
     padding: 0 0.75rem;
+    color: var(--color-create-task-form);
 }
 
 /* This is our style for the invalid fields */
@@ -224,6 +224,11 @@ header {
     margin-bottom: 0;
     padding: 0.5rem;
     border-bottom: 0.1rem solid var(--color-taskboard-title-border);
+}
+
+.board-name h3 {
+    color: var(--color-text-default);
+    margin-bottom: 0;
 }
 
 .tasks-container {
@@ -310,7 +315,7 @@ header {
 footer ul {
     display: flex;
     justify-content: center;
-    background-color: #a88957;
+    background-color: var(--background-color-footer);
     padding: 10px 5px;
     margin-bottom: 0em;
 }
@@ -318,8 +323,8 @@ footer ul {
 footer li {
     display: inline-block;
     list-style: none;
-    color: black;
-    font-size: smaller;
+    color: var(--color-text-default);
+    font-size: small;
     letter-spacing: 1px;
     margin: 0 0.5rem;
 }
