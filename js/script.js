@@ -113,7 +113,8 @@ const showCreateTaskForm = () => {
     console.log('Creating task.');
     const td = new Date();
     // set minimum date as today
-    document.getElementById("InputDate").setAttribute('min', td.toISOString().split('T')[0]);
+    const [day, month, year] = td.toLocaleDateString('en-au').split('/');
+    document.getElementById("InputDate").setAttribute('min', `${year}-${month}-${day}`);
     
     // set event listener to 'input' event for all input fileds
     setEventListener("InputTitle", 'input');
