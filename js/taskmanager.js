@@ -60,18 +60,18 @@ class TaskManager {
                                 <div class="card-body">
                                     <h5 class="card-title">${task.Title}</h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><small>Description</small></h6>
-                                    <p class="card-text"><textarea id="desc-${task.ID}" class="form-control" rows="3" ${task.taskDisabled === true? "disalbed" : ""}>${task.Description}</textarea></p>
+                                    <p class="card-text"><textarea id="desc-${task.ID}" class="form-control" rows="3" ${task.taskDisabled === true? "disabled = 'disalbed'" : ""}>${task.Description}</textarea></p>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item p-0">
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-text text-muted"><small>Due Date</small></h6>
-                                                <input type="date" id="date-${task.ID}" value="${task.DueDate.year}-${task.DueDate.month}-${task.DueDate.day}" ${task.taskDisabled === true? "disalbed" : ""}>
+                                                <input type="date" id="date-${task.ID}" value="${task.DueDate.year}-${task.DueDate.month}-${task.DueDate.day}" ${task.taskDisabled === true? "disabled = 'disalbed'" : ""}>
                                             </div>
                                         </li>
                                         <li class="list-group-item p-0">
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
-                                                <select id="assignee-${task.ID}" class="custom-select custom-select-sm my-1 border-0 text-muted" ${task.taskDisabled === true? "disalbed" : ""}>
+                                                <select id="assignee-${task.ID}" class="custom-select custom-select-sm my-1 border-0 text-muted" ${task.taskDisabled === true? "disabled = 'disalbed'" : ""}>
                                                     ${assigneeHTML}
                                                 </select>  
                                             </div>
@@ -79,13 +79,13 @@ class TaskManager {
                                         <li class="list-group-item p-0">
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-subtitle my-1 text-muted"><small>Status</small></h6> 
-                                                <select id="friday${task.ID}" onchange="onCardStatusChange(event)" class="custom-select custom-select-sm my-1 border-0 text-muted" ${task.taskDisabled === true? "disalbed" : ""}>
+                                                <select id="friday${task.ID}" onchange="onCardStatusChange(event)" class="custom-select custom-select-sm my-1 border-0 text-muted" ${task.taskDisabled === true? "disabled = 'disalbed'" : ""}>
                                                     ${statusHTML}
                                                 </select>  
                                             </div>
                                         </li>
                                         <li class="list-group-item ps-0 pe-0">
-                                            <button id="friday-mark${task.ID}" onclick="onMarkAsDone(event)" class=${task.markAsDone == true ? "taskDone-button" : "markTask-button"} ${task.markAsDone == true ? "disabled" : ""}>${task.markAsDone == true ? "Done" : "Mark as done"}</button>
+                                            <button id="friday-mark${task.ID}" onclick="onMarkAsDone(event)" class=${task.markAsDone == true ? "taskDone-button" : "markTask-button"} ${task.markAsDone == true ? "disabled = 'disalbed'" : ""}>${task.markAsDone == true ? "Done" : "Mark as done"}</button>
                                             <button id="delete-btn-${task.ID}" onclick="onDeleteTask(event)" type="button" class="delete-button text-danger float-end btn rounded bg-white border-1 border-secondary" style="--bs-btn-padding-y: 0.2rem;">Delete Task</button>
                                         </li>                                        
                                     </ul>                                                                         
@@ -142,6 +142,7 @@ class TaskManager {
         taskObj.indexOfStatus = taskValues.indexOfStatus;
         taskObj.taskDisabled = taskValues.taskDisabled;
         taskObj.markAsDone = taskValues.markAsDone;
+        taskObj.taskDisabled = taskValues.taskDisabled;
         const taskStr = JSON.stringify(taskObj);
         localStorage.setItem(taskValues.taskKey, taskStr);
     }

@@ -289,7 +289,8 @@ window.onMarkAsDone = function (event) {
         taskKey: `friday${taskId}`,
         Status: taskStatusValue,
         indexOfStatus: taskStatus.selectedIndex,
-        markAsDone: true
+        markAsDone: true,
+        taskDisabled: true
     };
 
     myTaskManager.updateTaskStatus(taskValues);
