@@ -301,6 +301,7 @@ window.onMarkAsDone = function (event) {
     doneBtn.setAttribute("disabled", "");
     doneBtn.innerText = "Done";
     parentNode.replaceChild(doneBtn, markAsDoneBtn);
+    myTaskManager.disableEditingOfATask(taskId);
 }
 
 window.onDeleteTask = function (event) {
