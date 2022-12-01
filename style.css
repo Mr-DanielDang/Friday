@@ -215,7 +215,6 @@ header {
 /* Task Board */
 .task-board {
     position: relative;
-    height: 100vh;
     background-color: var(--background-color-taskboard-body);
 }
 
@@ -231,11 +230,11 @@ header {
     margin-bottom: 0;
 }
 
-.tasks-container {
-    background-color: var(--background-color-taskboard-body);
+.task-container {
     padding: 2rem;
-    width: 100%;
-    height: auto;
+    height: 50vh;
+    overflow-y: scroll;
+    background-color: var(--background-color-taskboard-body);
 }
 
 .card {
@@ -257,6 +256,10 @@ header {
 .card textarea {
     border: none;
     padding: 0;
+}
+
+.card-body {
+    padding: 0.5rem 1rem;
 }
 
 .delete-button { 
