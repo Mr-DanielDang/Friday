@@ -299,6 +299,7 @@ function onMarkAsDone(event) {
     doneBtn.setAttribute("disabled", "");
     doneBtn.innerText = "Done";
     parentNode.replaceChild(doneBtn, markAsDoneBtn);
+    myTaskManager.disableEditingOfATask(taskId);
 }
 
 function onDeleteTask(event) {
@@ -414,18 +415,18 @@ class TaskManager {
                                 <div class="card-body">
                                     <h5 class="card-title">${task.Title}</h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><small>Description</small></h6>
-                                    <p class="card-text"><textarea class="form-control" rows="3" ${task.taskDisabled === true? "disalbed" : ""}>${task.Description}</textarea></p>
+                                    <p class="card-text"><textarea id="desc-${task.ID}" class="form-control" rows="3" ${task.taskDisabled === true? "disalbed" : ""}>${task.Description}</textarea></p>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item p-0">
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-text text-muted"><small>Due Date</small></h6>
-                                                <input type="date" value="${task.DueDate.year}-${task.DueDate.month}-${task.DueDate.day}" ${task.taskDisabled === true? "disalbed" : ""}>
+                                                <input type="date" id="date-${task.ID}" value="${task.DueDate.year}-${task.DueDate.month}-${task.DueDate.day}" ${task.taskDisabled === true? "disalbed" : ""}>
                                             </div>
                                         </li>
                                         <li class="list-group-item p-0">
                                             <div class="d-flex justify-content-between align-items-baseline">
                                                 <h6 class="card-subtitle my-1 text-muted"><small>Assigned To</small></h6>
-                                                <select class="custom-select custom-select-sm my-1 border-0 text-muted" ${task.taskDisabled === true? "disalbed" : ""}>
+                                                <select id="assignee-${task.ID}" class="custom-select custom-select-sm my-1 border-0 text-muted" ${task.taskDisabled === true? "disalbed" : ""}>
                                                     ${assigneeHTML}
                                                 </select>  
                                             </div>
@@ -439,7 +440,7 @@ class TaskManager {
                                             </div>
                                         </li>
                                         <li class="list-group-item pe-0">
-                                            <button id="friday-mark${task.ID}" onclick="onMarkAsDone(event)" class="markTask-button" type="button" ${task.markAsDone == true ? "disabled" : ""}>${task.markAsDone == true ? "Done" : "Mark as done"}</button>
+                                            <button id="friday-mark${task.ID}" onclick="onMarkAsDone(event)" class=${task.markAsDone == true ? "taskDone-button" : "markTask-button"} type="button" ${task.markAsDone == true ? "disabled" : ""}>${task.markAsDone == true ? "Done" : "Mark as done"}</button>
                                             <button id="delete-btn-${task.ID}" onclick="onDeleteTask(event)" type="button" class="delete-button text-danger float-end btn btn-sm rounded bg-white border-1 border-secondary" style="--bs-btn-padding-y: 0.1rem;">Delete Task</button>
                                         </li>                                        
                                     </ul>                                                                         
@@ -477,11 +478,11 @@ class TaskManager {
     }
 
     disableEditingOfATask (taskId) {
-        const taskDescription = document.querySelector(`#${taskId} textarea`);
-        const taskDate = document.querySelector(`#${taskId} input[type="date"]`);
+        const taskDescription = document.getElementById(`desc-${taskId}`);
+        const taskDate = document.getElementById(`date-${taskId}`);
         // the first select element is for assignees
-        const taskAssignedTo = document.querySelector(`#${taskId} select`);
-        const taskStatus = document.querySelector(`#${taskId} select[id="friday${taskId}"]`);
+        const taskAssignedTo = document.getElementById(`assignee-${taskId}`);
+        const taskStatus = document.getElementById(`friday${taskId}`);
 
         taskDescription.disabled = true;
         taskDate.disabled = true;
