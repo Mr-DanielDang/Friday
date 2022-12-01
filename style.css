@@ -279,7 +279,7 @@ header {
     border-style: solid;
     border-width: 1.25px;
     background-color: white;
-    transform: translate(10em, -0.6em);
+    transform: translate(4em, -0.6em);
 }
 
 .markTask-button:hover {

@@ -296,7 +296,7 @@ window.onMarkAsDone = function (event) {
     const markAsDoneBtn = document.getElementById(taskMarkId);
     const parentNode = markAsDoneBtn.parentNode;
     const doneBtn = document.createElement(`button`);
-    doneBtn.setAttribute("class", "markTask-button");
+    doneBtn.setAttribute("class", "taskDone-button");
     doneBtn.setAttribute("type", "button");
     doneBtn.setAttribute("disabled", "");
     doneBtn.innerText = "Done";
