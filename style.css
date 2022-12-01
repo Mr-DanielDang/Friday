@@ -279,16 +279,14 @@ header {
     border-style: solid;
     border-width: 1.25px;
     background-color: white;
-    transform: translate(-2em, -0.6em);
+    transform: translate(10em, -0.6em);
 }
 
 .markTask-button:hover {
     background-color: grey;
     color: whitesmoke;
-    transition: 0.2s;
+    transition: all 0.2s;
     scale: 1.2;
-    transform: translate(-1.7em, 0.2em);
-    margin: 0.5rem;
 }
 
 /* task done */
@@ -298,6 +296,11 @@ header {
     color: whitesmoke;
     border-color: green;
     font-weight: bold;
+    border-radius: 6px;
+    border-width: 1px;
+    border-style: solid;
+    font-size: small;
+    width: 4rem;
 }
 
 /* footer */
