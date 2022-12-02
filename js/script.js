@@ -169,8 +169,6 @@ function validateTaskForm(event) {
         console.log("Title invalid!");
         // display an appropriate error message
         showError("InputTitle");
-        // prevent the form from being sent by canceling the event
-        event.preventDefault();
         thereIsError = true;
     }
 
@@ -183,8 +181,6 @@ function validateTaskForm(event) {
         console.log("Assignee invalid!");
         // display an appropriate error message
         showError("InputName");
-        // prevent the form from being sent by canceling the event
-        event.preventDefault();
         thereIsError = true;
     }
 
@@ -196,8 +192,6 @@ function validateTaskForm(event) {
         console.log("Description invalid!");
         // display an appropriate error message
         showError("InputDesc");
-        // prevent the form from being sent by canceling the event
-        event.preventDefault();
         thereIsError = true;
     }
 
@@ -209,8 +203,6 @@ function validateTaskForm(event) {
         console.log("Due date invalid!");
         // display an appropriate error message
         showError("InputDate");
-        // prevent the form from being sent by canceling the event
-        event.preventDefault();
         thereIsError = true;
     }
 
@@ -222,16 +214,18 @@ function validateTaskForm(event) {
     } else {
         console.log("Status invalid!");
         // display an appropriate error message
-        showError("InputStatus");
-        // prevent the form from being sent by canceling the event
-        event.preventDefault();
+        showError("InputStatus");        
         thereIsError = true;
     }
 
     if (thereIsError === true) {
+        // prevent the form from being sent by canceling the event
+        event.preventDefault();
         return;
     }
 
+    // prevent the form from being sent by canceling the event
+    event.preventDefault();
     console.log("To create a task ...\n");
     createATask(userInput);
     clearInputsOfCreateTaskForm();
