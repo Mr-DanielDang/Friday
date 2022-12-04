@@ -56,6 +56,11 @@ header {
     display: inline;
 }
 
+.header-container a {
+    text-decoration: none;
+    color: var(--color-text-default);
+}
+
 .header-container #logo {
     width: 100px;
     height: 70px;

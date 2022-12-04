@@ -1,12 +1,5 @@
 import { TaskManager } from "./taskmanager.js";
 
-const currentDate = new Date();
-const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-
-document.getElementById("current-date").innerHTML = currentDate.toLocaleDateString('en-au', options);
-
-console.log(currentDate.toLocaleDateString('en-au', options));
-
 const clearInputsOfCreateTaskForm = () => {
     document.getElementById("InputTitle").value = "";
     document.getElementById("InputName").value = "";
@@ -27,9 +20,6 @@ const showError = (elementId) => {
                     referredErrorSpan.textContent = `please input a title, minimum ${referredElement.minLength} characters`;
                 } else if ((referredElement.validity.tooShort) || (referredElement.value.length < 9)) {
                     // If the data is too short, display the following error message.
-                    console.log(referredErrorSpan.textContent);
-                    console.log(referredElement.minLength);
-                    console.log(referredElement.value.length);
                     referredErrorSpan.textContent = `Title should be at least ${referredElement.minLength} characters; you entered ${referredElement.value.length}`;
                 } 
 
@@ -115,7 +105,6 @@ const setEventListener = (elementId, nameOfEvent) => {
 
 const showCreateTaskForm = () => {
     document.getElementById("create-task").style.display = 'block';
-    console.log('Creating task.');
     const td = new Date();
     // set minimum date as today
     const [day, month, year] = td.toLocaleDateString('en-au').split('/');
@@ -133,30 +122,13 @@ const resetCreateTaskForm = (e) => {
     document.getElementById("create-task").style.display = 'block';
     clearInputsOfCreateTaskForm();
     e.preventDefault();
-    console.log('Resetting create task.');
 }
 
 const closeCreateTaskForm = () => {
     document.getElementById("create-task").style.display = 'none';
-    console.log('Closing task.');
     clearInputsOfCreateTaskForm();
 }
 
-const createTaskBtn = document.getElementById("createTask");
-createTaskBtn.onclick = showCreateTaskForm;
-const resetTaskBtn = document.getElementById("resetTask");
-resetTaskBtn.onclick = resetCreateTaskForm;
-const closeTaskForm = document.getElementById("closeTask");
-closeTaskForm.onclick = closeCreateTaskForm;
-
-
-const submitTask = document.getElementById("submitTask");
-submitTask.addEventListener("click", validateTaskForm);
-
-// Name -> Not Empty and longer than 8 characters
-// Description -> Not Empty and longer than 15 characters
-// AssignedTo -> Not Empty and longer than 8 characters
-// DueDate -> Not Empty and not less than current date
 function validateTaskForm(event) { 
     const inputTitle = document.getElementById("InputTitle");
     const inputName = document.getElementById("InputName");    
@@ -166,12 +138,11 @@ function validateTaskForm(event) {
     const userInput = {};
     let thereIsError = false;
 
+    // Name -> Not Empty and longer than 8 characters
     if ((inputTitle.validity.valid) && (inputTitle.value.length > 8)) {
         userInput.Title = inputTitle.value;
         inputTitle.classList.add('valid');
-        console.log("Title valid");
     } else {
-        console.log("Title invalid!");
         // display an appropriate error message
         showError("InputTitle");
         thereIsError = true;
@@ -181,29 +152,26 @@ function validateTaskForm(event) {
         userInput.AssignedTo = inputName.value;
         inputName.classList.add('valid');
     } else {
-        console.log("Assignee invalid!");
         // display an appropriate error message
         showError("InputName");
         thereIsError = true;
     }
 
+    // Description -> Not Empty and longer than 15 characters
     if ((inputDesc.validity.valid) && (inputDesc.value.length > 15)) {
         userInput.Description = inputDesc.value;
         inputDesc.classList.add("valid");
-        console.log("Description valid");
     } else {
-        console.log("Description invalid!");
         // display an appropriate error message
         showError("InputDesc");
         thereIsError = true;
     }
 
+    // DueDate -> Not Empty and not less than current date
     if (inputDate.validity.valid) {
         userInput.dueDate = inputDate.value;
         inputDate.classList.add("valid");
-        console.log("Due date valid");
     } else {
-        console.log("Due date invalid!");
         // display an appropriate error message
         showError("InputDate");
         thereIsError = true;
@@ -213,9 +181,7 @@ function validateTaskForm(event) {
         userInput.Status = inputStatus.options[inputStatus.selectedIndex].text;
         userInput.selectedIndexOfStatus = inputStatus.selectedIndex > 0? inputStatus.selectedIndex - 1 : 0;
         inputStatus.classList.add("valid");
-        console.log("Status valid");
     } else {
-        console.log("Status invalid!");
         // display an appropriate error message
         showError("InputStatus");        
         thereIsError = true;
@@ -229,34 +195,41 @@ function validateTaskForm(event) {
 
     // prevent the form from being sent by canceling the event
     event.preventDefault();
-    console.log("To create a task ...\n");
     createATask(userInput);
     clearInputsOfCreateTaskForm();
 }
 
-window.onCardStatusChange = function (event) {
-    event.preventDefault();
+const updateCardHeaderBackground = (taskId, statusValue) => {
     const cardHeaderBackgrounds = {
         "To Do": "bg-info",
         "In Progress": "bg-warning",
         "In Review": "bg-primary",
         "Done": "bg-success"
     };
-    const taskStatusId = event.target.id; // e.g. friday05
-    // grap the number only from, e.g. friday05
-    const taskId = taskStatusId.substring(6);
-    const taskStatusValue = event.target.options[event.target.selectedIndex].text;
+
     const targetCard = document.getElementById(`card-header${taskId}`);
     targetCard.classList.remove("bg-info");
     targetCard.classList.remove("bg-warning");
     targetCard.classList.remove("bg-primary");
     targetCard.classList.remove("bg-success");
-    targetCard.classList.add(cardHeaderBackgrounds[taskStatusValue]);
+    targetCard.classList.add(cardHeaderBackgrounds[statusValue]);
+}
+
+window.onCardStatusChange = function (event) {
+    event.preventDefault();
+    
+    const taskStatusId = event.target.id; // e.g. friday05
+    // grap the number only from, e.g. friday05
+    const taskId = taskStatusId.substring(6);
+    const taskStatusValue = event.target.options[event.target.selectedIndex].text;
+    updateCardHeaderBackground(taskId, taskStatusValue);
 
     const taskValues = {
         taskKey: taskStatusId,
         Status: taskStatusValue,
-        indexOfStatus: event.target.selectedIndex
+        indexOfStatus: event.target.selectedIndex,
+        markAsDone: false,
+        taskDisabled: false
     };
 
     myTaskManager.updateTaskStatus(taskValues);
@@ -264,24 +237,13 @@ window.onCardStatusChange = function (event) {
 
 window.onMarkAsDone = function (event) {
     event.preventDefault();
-    const cardHeaderBackgrounds = {
-        "To Do": "bg-info",
-        "In Progress": "bg-warning",
-        "In Review": "bg-primary",
-        "Done": "bg-success"
-    };
-    const taskMarkId = event.target.id;
+    const taskMarkId = event.target.id; // e.g. friday-mark04
+    // grap the number only from, e.g. friday-mark04
     const taskId = taskMarkId.substring(11);
     const taskStatus = document.getElementById(`friday${taskId}`);
     taskStatus.selectedIndex = 3;
-
     const taskStatusValue = taskStatus.options[taskStatus.selectedIndex].text;
-    const targetCard = document.getElementById(`card-header${taskId}`);
-    targetCard.classList.remove("bg-info");
-    targetCard.classList.remove("bg-warning");
-    targetCard.classList.remove("bg-primary");
-    targetCard.classList.remove("bg-success");
-    targetCard.classList.add(cardHeaderBackgrounds[taskStatusValue]);
+    updateCardHeaderBackground(taskId, taskStatusValue);
 
     const taskValues = {
         taskKey: `friday${taskId}`,
@@ -313,23 +275,6 @@ window.onDeleteTask = function (event) {
     myTaskManager.removeTaskHtml(taskId);
 }
 
-const createATask = (userInput) => {
-    const taskObj = createATaskObj(myTaskManager.currentID);
-    taskObj.Title = userInput.Title;
-    taskObj.Description = userInput.Description;
-    const [yearValue, monthValue, dayValue] = userInput.dueDate.split('-');
-    taskObj.DueDate ={day: dayValue, month: monthValue, year: yearValue};
-    taskObj.AssignedTo = userInput.AssignedTo;
-    taskObj.Status = userInput.Status;
-    taskObj.indexOfAssignee = userInput.selectedIndexOfAssignee;
-    taskObj.indexOfStatus = userInput.selectedIndexOfStatus;
-    taskObj.Assignee = userInput.AssignedTo;
-
-    const taskHTML = myTaskManager.addTaskHTML(taskObj);
-    myTaskManager.addTask(taskObj);
-    myTaskManager.renderTask(taskHTML);
-}
-
 const createATaskObj = (id) => {
     return {
         ID: id,
@@ -356,16 +301,43 @@ const createATaskObj = (id) => {
     }
 };
 
+const createATask = (userInput) => {
+    const taskObj = createATaskObj(myTaskManager.currentID);
+    taskObj.Title = userInput.Title;
+    taskObj.Description = userInput.Description;
+    const [yearValue, monthValue, dayValue] = userInput.dueDate.split('-');
+    taskObj.DueDate ={day: dayValue, month: monthValue, year: yearValue};
+    taskObj.AssignedTo = userInput.AssignedTo;
+    taskObj.Status = userInput.Status;
+    taskObj.indexOfAssignee = userInput.selectedIndexOfAssignee;
+    taskObj.indexOfStatus = userInput.selectedIndexOfStatus;
+    taskObj.Assignee = userInput.AssignedTo;
+
+    const taskHTML = myTaskManager.addTaskHTML(taskObj);
+    myTaskManager.addTask(taskObj);
+    myTaskManager.renderTask(taskHTML);
+}
+
+const currentDate = new Date();
+const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+document.getElementById("current-date").innerHTML = currentDate.toLocaleDateString('en-au', options);
+
+const createTaskBtn = document.getElementById("createTask");
+createTaskBtn.onclick = showCreateTaskForm;
+const resetTaskBtn = document.getElementById("resetTask");
+resetTaskBtn.onclick = resetCreateTaskForm;
+const closeTaskForm = document.getElementById("closeTask");
+closeTaskForm.onclick = closeCreateTaskForm;
+const submitTask = document.getElementById("submitTask");
+submitTask.addEventListener("click", validateTaskForm);
+
 const myTaskManager = new TaskManager("Friday");
 myTaskManager.loadStoredTasks();
-console.log("All tasks: \n")
-console.log(myTaskManager.getAllTasks);
 
 const allTasks = myTaskManager.getAllTasks;
 const idArray = allTasks.map(task => task.ID);
 if (idArray.length > 0) {
     const maxId = Math.max(...idArray);
-    console.log(`max ID used last time: ${maxId}`);
     myTaskManager.initiateCurrentId(maxId + 1);
 }
 

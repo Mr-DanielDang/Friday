@@ -55,7 +55,6 @@ class TaskManager {
         task.ID = this._currentID;
         this._currentID += 1;
         this._tasks.push(task);
-        console.log(`friday${task.ID}`);
         const taskStr = JSON.stringify(task);
         localStorage.setItem(`friday${task.ID}`, taskStr);
     }
@@ -142,7 +141,6 @@ class TaskManager {
             return;
         }
 
-        console.log(`removing task object with id: friday${taskId} at index ${indexOfTask} ...`);
         this._tasks.splice(indexOfTask, 1);
         localStorage.removeItem(`friday${taskId}`);
     }
@@ -176,7 +174,6 @@ class TaskManager {
         const regex = /friday\d+/;
         for (let index = 0; index < localStorage.length; index++) {
             const keyValue = localStorage.key(index); 
-            console.log(`kevValue: ${keyValue}`);
             if ((undefined !== keyValue && (null !== keyValue))) {
                 if (null !== keyValue.match(regex)) {
                     const storedItem = localStorage.getItem(keyValue);
