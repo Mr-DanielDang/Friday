@@ -196,29 +196,37 @@ function validateTaskForm(event) {
     clearInputsOfCreateTaskForm();
 }
 
-window.onCardStatusChange = function (event) {
-    event.preventDefault();
+const updateCardHeaderBackground = (taskId, statusValue) => {
     const cardHeaderBackgrounds = {
         "To Do": "bg-info",
         "In Progress": "bg-warning",
         "In Review": "bg-primary",
         "Done": "bg-success"
     };
-    const taskStatusId = event.target.id; // e.g. friday05
-    // grap the number only from, e.g. friday05
-    const taskId = taskStatusId.substring(6);
-    const taskStatusValue = event.target.options[event.target.selectedIndex].text;
+
     const targetCard = document.getElementById(`card-header${taskId}`);
     targetCard.classList.remove("bg-info");
     targetCard.classList.remove("bg-warning");
     targetCard.classList.remove("bg-primary");
     targetCard.classList.remove("bg-success");
-    targetCard.classList.add(cardHeaderBackgrounds[taskStatusValue]);
+    targetCard.classList.add(cardHeaderBackgrounds[statusValue]);
+}
+
+window.onCardStatusChange = function (event) {
+    event.preventDefault();
+    
+    const taskStatusId = event.target.id; // e.g. friday05
+    // grap the number only from, e.g. friday05
+    const taskId = taskStatusId.substring(6);
+    const taskStatusValue = event.target.options[event.target.selectedIndex].text;
+    updateCardHeaderBackground(taskId, taskStatusValue);
 
     const taskValues = {
         taskKey: taskStatusId,
         Status: taskStatusValue,
-        indexOfStatus: event.target.selectedIndex
+        indexOfStatus: event.target.selectedIndex,
+        markAsDone: false,
+        taskDisabled: false
     };
 
     myTaskManager.updateTaskStatus(taskValues);
@@ -226,24 +234,13 @@ window.onCardStatusChange = function (event) {
 
 window.onMarkAsDone = function (event) {
     event.preventDefault();
-    const cardHeaderBackgrounds = {
-        "To Do": "bg-info",
-        "In Progress": "bg-warning",
-        "In Review": "bg-primary",
-        "Done": "bg-success"
-    };
-    const taskMarkId = event.target.id;
+    const taskMarkId = event.target.id; // e.g. friday-mark04
+    // grap the number only from, e.g. friday-mark04
     const taskId = taskMarkId.substring(11);
     const taskStatus = document.getElementById(`friday${taskId}`);
     taskStatus.selectedIndex = 3;
-
     const taskStatusValue = taskStatus.options[taskStatus.selectedIndex].text;
-    const targetCard = document.getElementById(`card-header${taskId}`);
-    targetCard.classList.remove("bg-info");
-    targetCard.classList.remove("bg-warning");
-    targetCard.classList.remove("bg-primary");
-    targetCard.classList.remove("bg-success");
-    targetCard.classList.add(cardHeaderBackgrounds[taskStatusValue]);
+    updateCardHeaderBackground(taskId, taskStatusValue);
 
     const taskValues = {
         taskKey: `friday${taskId}`,
