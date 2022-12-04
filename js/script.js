@@ -45,7 +45,7 @@ const showError = (elementId) => {
                     referredErrorSpan.textContent = `please input description, minimum ${referredElement.minLength} characters`;
                 } else if ((referredElement.validity.tooShort) || (referredElement.value.length < 16)) {
                     // If the data is too short, display the following error message.
-                    referredErrorSpan.textContent = `Title should be at least ${referredElement.minLength} characters; you entered ${referredElement.value.length}`;
+                    referredErrorSpan.textContent = `Description should be at least ${referredElement.minLength} characters; you entered ${referredElement.value.length}`;
                 }
 
                 // Set the styling appropriately
@@ -58,7 +58,7 @@ const showError = (elementId) => {
 
                 if ((referredElement.value === "") || (referredElement.valueAsNumber < dateOfToday.getTime())) {
                     // If the set date is less than today.
-                    referredErrorSpan.textContent = `please choose a date not less than ${dateOfToday.toISOString().split('T')[0]}`;
+                    referredErrorSpan.textContent = `please choose a date not less than ${dateOfToday.toLocaleDateString('en-au', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric'})}`;
                 }
 
                 // Set the styling appropriately
