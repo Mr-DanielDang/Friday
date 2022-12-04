@@ -46,24 +46,17 @@
                     <!-- Trying to change the colour of the borders -->
                     <div class="container-md div-taskInputColor" style="padding: 5px;">
                         <label for="InputTitle">Title</label>
-                        <input type="text" class="form-control div-taskInputAreaColor" id="InputTitle" aria-describedby="titleHelp" minlength="9" maxlength="60" required>
+                        <input type="text" class="form-control div-taskInputAreaColor" id="InputTitle" aria-describedby="titleHelp" minlength="9" maxlength="60" placeholder="minimal 9 characters" required>
                         <span class="error" aria-live="polite"></span>
                     </div>
                     <div class="container-md border-top-0 div-taskInputColor" style="padding: 5px;">
                         <label for="InputName" class="col-auto">Assigned To:</label>
-                        <div class="col-auto">
-                            <select class="form-control div-taskInputAreaColor" id="InputName" aria-describedby="nameHelp" aria-placeholder="select a group member" required>
-                                <option value="0">--select member--</option>
-                                <option value="1">Jerry Lin</option>
-                                <option value="2">Samantha Bijok</option>
-                                <option value="3">Daniel Dang</option>
-                            </select>
-                            <span class="error" aria-live="polite"></span>
-                        </div>
+                        <input type="text" class="form-control div-taskInputAreaColor" id="InputName" aria-describedby="nameHelp" minlength="9"  maxlength="16" placeholder="input a name, 9 to 16 characters" required>
+                        <span class="error" aria-live="polite"></span>
                     </div>
                     <div class="container-md border-top-0 div-taskInputColor" style="padding: 5px;">
                         <label for="InputDesc">Description</label>
-                        <textarea class="form-control div-taskInputAreaColor" id="InputDesc" style="height: 120px;" minlength="16" required></textarea>
+                        <textarea class="form-control div-taskInputAreaColor" id="InputDesc" style="height: 120px;" minlength="16" placeholder="some details here, minimal 16 characters" required></textarea>
                         <span class="error" aria-live="polite"></span>
                     </div>
                     <div class="container-md border-top-0 div-taskInputColor" style="padding: 5px;">

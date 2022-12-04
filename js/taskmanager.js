@@ -1,6 +1,7 @@
 class TaskManager {
     constructor(user) {
         this._user = user;
+        this._assignees = [];
         this._tasks = [];
         this._currentID = 0;
     }
@@ -11,6 +12,29 @@ class TaskManager {
 
     get getAllTasks () {
         return this._tasks;
+    }
+
+    get getAssignees () {
+        return this._assignees;
+    }
+
+    storeAssignees(assignees) {
+        let assigneesStr = localStorage.getItem('friday-assignees');
+        if (null !== assigneesStr) {
+            assigneesStr += ",";
+            assigneesStr = assigneesStr.concat(assignees);
+        } else {
+            assigneesStr = assignees;
+        }
+
+        let assigneeArray = assigneesStr.split(",");
+        assigneeArray = assigneeArray.filter(assignee => assignee !== "");
+        assigneeArray.sort();
+        // remove duplicated assignees in the assignee Array
+        assigneeArray = [...new Set(assigneeArray)];
+        localStorage.setItem('friday-assignees', assigneeArray.toString());
+        
+        this._assignees = [...assigneeArray];
     }
 
     getTasksWithStatus(status) {
@@ -38,12 +62,13 @@ class TaskManager {
 
     addTaskHTML(task) {
         // these ideally should be inline with those in Create Task Form in a global scope
-        const assignees = ["Jerry Lin", "Samantha Bijok", "Daniel Dang"];
         const taskStatus = ["To Do", "In Progress", "In Review", "Done"];
+        this.storeAssignees(task.Assignee);
+        const assignees = this.getAssignees;        
     
         let assigneeHTML = "";
         for (let index = 0; index < assignees.length; index++) {
-            assigneeHTML += `<option value="${index + 1}" ${task.indexOfAssignee === index ? "selected": ""}><small>${assignees[index]}</small></option>\n`;
+            assigneeHTML += `<option value="${index + 1}" ${task.Assignee === assignees[index] ? "selected": ""}><small>${assignees[index]}</small></option>\n`;
         }
         assigneeHTML += '\n';
     

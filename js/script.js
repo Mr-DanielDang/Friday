@@ -9,7 +9,7 @@ console.log(currentDate.toLocaleDateString('en-au', options));
 
 const clearInputsOfCreateTaskForm = () => {
     document.getElementById("InputTitle").value = "";
-    document.getElementById("InputName").selectedIndex = 0;
+    document.getElementById("InputName").value = "";
     document.getElementById("InputDesc").value = "";        
     document.getElementById("InputDate").value = "";
     document.getElementById("InputStatus").selectedIndex = 0;       
@@ -39,9 +39,14 @@ const showError = (elementId) => {
             break;
         case "InputName":
             {
-                if (referredElement.value === "0") {
+                if (referredElement.validity.valueMissing) {
                     // If an assignee was not selected, display the following error message.
-                    referredErrorSpan.textContent = "please choose one assignee from the dropdown list";
+                    referredErrorSpan.textContent = "please input a name for an assignee";
+                } else if ((referredElement.validity.tooShort) || (referredElement.value.length < 9)) {
+                    // If the data is too short, display the following error message.
+                    referredErrorSpan.textContent = `Assignee's name should be ${referredElement.minLength} to ${referredElement.maxLength} characters; you entered ${referredElement.value.length}`;
+                } else if (referredElement.value.includes(",")) {
+                    referredErrorSpan.textContent = 'please remove "," from the input';
                 }
 
                 // Set the styling appropriately
@@ -55,7 +60,7 @@ const showError = (elementId) => {
                     referredErrorSpan.textContent = `please input description, minimum ${referredElement.minLength} characters`;
                 } else if ((referredElement.validity.tooShort) || (referredElement.value.length < 16)) {
                     // If the data is too short, display the following error message.
-                    referredErrorSpan.textContent = `Title should be at least ${referredElement.minLength} characters; you entered ${referredElement.value.length}`;
+                    referredErrorSpan.textContent = `Description should be at least ${referredElement.minLength} characters; you entered ${referredElement.value.length}`;
                 }
 
                 // Set the styling appropriately
@@ -68,7 +73,7 @@ const showError = (elementId) => {
 
                 if ((referredElement.value === "") || (referredElement.valueAsNumber < dateOfToday.getTime())) {
                     // If the set date is less than today.
-                    referredErrorSpan.textContent = `please choose a date not less than ${dateOfToday.toISOString().split('T')[0]}`;
+                    referredErrorSpan.textContent = `please choose a date not less than ${dateOfToday.toLocaleDateString('en-au', { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric'})}`;
                 }
 
                 // Set the styling appropriately
@@ -172,11 +177,9 @@ function validateTaskForm(event) {
         thereIsError = true;
     }
 
-    if ((inputName.value !== "0")  && (inputName.options[inputName.selectedIndex].text.length > 8)){
-        userInput.AssignedTo = inputName.options[inputName.selectedIndex].text;
-        userInput.selectedIndexOfAssignee = inputName.selectedIndex > 0? inputName.selectedIndex - 1 : 0; 
-        inputName.classList.add("valid");
-        console.log("Assignee valid");
+    if ((inputName.validity.valid) && (inputName.value.length > 8) && (!inputName.value.includes(","))) {
+        userInput.AssignedTo = inputName.value;
+        inputName.classList.add('valid');
     } else {
         console.log("Assignee invalid!");
         // display an appropriate error message
@@ -320,6 +323,7 @@ const createATask = (userInput) => {
     taskObj.Status = userInput.Status;
     taskObj.indexOfAssignee = userInput.selectedIndexOfAssignee;
     taskObj.indexOfStatus = userInput.selectedIndexOfStatus;
+    taskObj.Assignee = userInput.AssignedTo;
 
     const taskHTML = myTaskManager.addTaskHTML(taskObj);
     myTaskManager.addTask(taskObj);
@@ -333,6 +337,7 @@ const createATaskObj = (id) => {
         Description: "",
         AssignedTo: "",
         indexOfAssignee: 0,
+        Assignee: "",
         DueDate: {
             day: 0,
             month: 0,
@@ -351,7 +356,7 @@ const createATaskObj = (id) => {
     }
 };
 
-const myTaskManager = new TaskManager("group5");
+const myTaskManager = new TaskManager("Friday");
 myTaskManager.loadStoredTasks();
 console.log("All tasks: \n")
 console.log(myTaskManager.getAllTasks);
